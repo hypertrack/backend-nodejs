@@ -1,0 +1,20 @@
+{
+  "name": "sample-backend-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js & lt --subdomain ht-dev-ag --port 8080"
+  },
+  "author": "Alexander Graebe <alex.graebe@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "localtunnel": "^1.9.2",
+    "nodemon": "^1.19.1",
+    "socket.io": "^2.2.0"
+  }
+}
