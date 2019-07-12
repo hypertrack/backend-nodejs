@@ -76,6 +76,8 @@ app.post('/hypertrack', async function (req, res) {
     for (let i = 0; i < webhookBody.length; i++) {
       let data = webhookBody[i];
 
+      console.log(data);
+
       switch (data.type) {
         case 'location':
           console.log('==== LOCATION UPDATE');
@@ -89,6 +91,7 @@ app.post('/hypertrack', async function (req, res) {
           break;
         case 'summary':
           console.log('==== SUMMARY UPDATE');
+          data = await handleSummaryUpdate(data, req);
           break;
         case 'trip':
           console.log('==== TRIP UPDATE=');
@@ -113,6 +116,26 @@ async function handleLocationUpdate(data) {
     // update: location data
     {
       location: {
+        data: data.data,
+        recorded_at: data.recorded_at
+      }
+    },
+    // callback
+    function(err, res) {
+    if (err) throw err;
+
+    return res;
+  });
+};
+
+async function handleSummaryUpdate(data) {
+  // update device in DB
+  return await mongoose.model('Device').findOneAndUpdate(
+    // filter: by device_id
+    { device_id: data.device_id },
+    // update: summary data
+    {
+      summary: {
         data: data.data,
         recorded_at: data.recorded_at
       }

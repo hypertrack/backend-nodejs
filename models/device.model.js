@@ -46,6 +46,14 @@ const DeviceSchema = new mongoose.Schema({
             type: Date
         }
     },
+    "summary": {
+        "data": {
+            type: Object
+        },
+        "recorded_at": {
+            type: Date
+        }
+    },
     "device_health": {
         "data": {
             "value": {
@@ -62,6 +70,50 @@ const DeviceSchema = new mongoose.Schema({
     "device_status": {
         type: String,
         required: true
+    },
+    "device_info": {
+        "has-play-services": {
+            type: Boolean
+        },
+        "device-model": {
+            type: String
+        },
+        "os-version": {
+            type: String
+        },
+        "network-operator": {
+            type: String
+        },
+        "os-name": {
+            type: String
+        },
+        "name": {
+            type: String
+        },
+        "recorded-at": {
+            type: String
+        },
+        "app-name": {
+            type: String
+        },
+        "device_id": {
+            type: String
+        },
+        "timezone": {
+            type: String
+        },
+        "sdk-version": {
+            type: String
+        },
+        "app-version-number": {
+            type: String
+        },
+        "device-brand": {
+            type: String
+        },
+        "os-hardware-identifier": {
+            type: String
+        }
     },
     "views": {
         "share_url": {
