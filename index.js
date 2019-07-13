@@ -76,7 +76,11 @@ app.post('/hypertrack', async function (req, res) {
     for (let i = 0; i < webhookBody.length; i++) {
       let data = webhookBody[i];
 
+      // print data
       console.log(data);
+
+      // notify client
+      res.io.emit(data.type, data);
 
       switch (data.type) {
         case 'location':
@@ -99,9 +103,6 @@ app.post('/hypertrack', async function (req, res) {
         default:
           break;
       }
-
-      // notify client
-      res.io.emit(data.type, data);
     };
   }
 
