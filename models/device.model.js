@@ -46,14 +46,6 @@ const DeviceSchema = new mongoose.Schema({
             type: Date
         }
     },
-    "summary": {
-        "data": {
-            type: Object
-        },
-        "recorded_at": {
-            type: Date
-        }
-    },
     "device_health": {
         "data": {
             "value": {
