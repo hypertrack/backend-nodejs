@@ -18,17 +18,17 @@ module.exports = (app) => {
                 switch (data.type) {
                     case 'location':
                         console.log('==== LOCATION UPDATE');
-                        data = await handleLocationUpdate(data, req);
+                        webhook.addLocation(data);
+                        break;
+                    case 'summary':
+                        console.log('==== SUMMARY UPDATE');
+                        webhook.addSummary(data);
                         break;
                     case 'activity':
                         console.log('==== ACTIVITY UPDATE');
                         break;
                     case 'health':
                         console.log('==== HEALTH UPDATE');
-                        break;
-                    case 'summary':
-                        console.log('==== SUMMARY UPDATE');
-                        webhook.addSummary(data);
                         break;
                     case 'trip':
                         console.log('==== TRIP UPDATE');

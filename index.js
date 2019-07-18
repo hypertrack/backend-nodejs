@@ -25,6 +25,7 @@ mongoose.set('debug', true);
 
 // add routes
 require('./routes/device.route')(app);
+require('./routes/location.route')(app);
 require('./routes/summary.route')(app);
 require('./routes/webhook.route')(app);
 

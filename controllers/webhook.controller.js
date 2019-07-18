@@ -1,4 +1,5 @@
 const summaries = require('./summary.controller');
+const locations = require('./location.controller');
 
 // Add summary
 exports.addSummary = (data) => {
@@ -14,6 +15,18 @@ exports.addSummary = (data) => {
     });
 };
 
+// Add location update
+exports.addLocation = (data) => {
+    locations.addOne({
+        recorded_at: data.recorded_at,
+        device_id: data.device_id,
+        altitude: data.altitude,
+        bearing: data.bearing,
+        speed: data.speed,
+        location_accuracy: data.location_accuracy,
+        location: data.location
+    });
+};
 
 exports.handleLocationUpdate = async (data) => {
     // update device in DB
