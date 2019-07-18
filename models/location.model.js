@@ -47,6 +47,30 @@ const LocationSchema = new mongoose.Schema({
 });
 
 // index device_id
-LocationSchema.index({ device_id: 1 });
+LocationSchema.index({
+    device_id: 1
+});
+
+// update device location post save
+LocationSchema.post('save', function(doc) {
+    mongoose.model('Device').findOneAndUpdate(
+        // filter: by device_id
+        {
+            device_id: doc.device_id
+        },
+        // update: location data
+        {
+            location: {
+                data: {
+                    speed: doc.speed,
+                    altitude: doc.altitude,
+                    location_accuracy: doc.location_accuracy,
+                    bearing: doc.bearing,
+                    location: doc.location
+                },
+                recorded_at: doc.recorded_at
+            }
+        });
+  });
 
 module.exports = mongoose.model('Location', LocationSchema);
