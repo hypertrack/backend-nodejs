@@ -1,2 +1,2 @@
-# sample-backend-nodejs
- Sample NodeJS Server integration
+# Placeline Sample Backend
+Sample NodeJS server integration for Placeline application
