@@ -10,7 +10,7 @@ const SummarySchema = new mongoose.Schema({
     },
     "recorded_at": {
         type: Date,
-        required: true
+        // required: true
     },
     "distance": {
         type: Number
