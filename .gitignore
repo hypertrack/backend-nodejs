@@ -89,3 +89,6 @@ typings/
 
 # OSX
 .DS_Store
+
+# Heroku
+/*.env
