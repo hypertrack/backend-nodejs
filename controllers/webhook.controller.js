@@ -1,6 +1,7 @@
 const summaries = require('./summary.controller');
 const locations = require('./location.controller');
 const activities = require('./activity.controller');
+const health = require('./health.controller');
 
 // Add summary
 exports.addSummary = (obj) => {
@@ -36,5 +37,15 @@ exports.addActivity = (obj) => {
         device_id: obj.device_id,
         value: obj.data.value,
         location: obj.data.location
+    });
+};
+
+// Add health update
+exports.addHealth = (obj) => {
+    health.addOne({
+        recorded_at: obj.recorded_at,
+        device_id: obj.device_id,
+        value: obj.data.value,
+        hint: obj.data.hint
     });
 };

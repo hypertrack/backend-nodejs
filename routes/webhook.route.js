@@ -30,6 +30,7 @@ module.exports = (app) => {
                         break;
                     case 'health':
                         console.log('==== HEALTH UPDATE');
+                        webhook.addHealth(data);
                         break;
                     case 'trip':
                         console.log('==== TRIP UPDATE');
