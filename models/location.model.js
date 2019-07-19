@@ -5,7 +5,6 @@ const LocationSchema = new mongoose.Schema({
     "device_id": {
         type: String,
         index: true,
-        unique: true,
         required: true
     },
     "recorded_at": {

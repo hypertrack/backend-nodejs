@@ -5,12 +5,12 @@ const SummarySchema = new mongoose.Schema({
     "device_id": {
         type: String,
         index: true,
-        unique: true,
         required: true
     },
     "recorded_at": {
         type: Date,
         // required: true
+        // TODO: Summaries don't have recorded_at ??
     },
     "distance": {
         type: Number
