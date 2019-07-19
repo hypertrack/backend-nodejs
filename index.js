@@ -30,8 +30,8 @@ require('./routes/summary.route')(app);
 require('./routes/webhook.route')(app);
 
 // start server
-http.listen(8080, function(){
-  console.log('listening on *:8080');
+http.listen(process.env.PORT || 8080, function(){
+  console.log(`listening on *:${process.env.PORT || 8080}`);
 
   // update all devices in DB using HyperTrack API
   const base64auth = Buffer.from(`${process.env.HT_ACCOUNT_ID}:${process.env.HT_SECRET_KEY}`).toString('base64');

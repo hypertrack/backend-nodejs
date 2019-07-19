@@ -1,0 +1,15 @@
+{
+    "name": "Sample Backend NodeJS",
+    "description": "Sample NodeJS server integration for Placeline application",
+    "repository": "hhttps://github.com/hypertrack/sample-backend-nodejs",
+    "logo": "https://docs.hypertrack.com/images/logo.png",
+    "keywords": [
+        "sample",
+        "hypertrack",
+        "placeline",
+        "integration",
+        "mongodb",
+        "mongoose",
+        "heroku"
+    ]
+  }
