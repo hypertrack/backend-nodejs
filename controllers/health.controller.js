@@ -5,7 +5,7 @@ exports.findAll = (req, res) => {
     Health
         .find()
         .sort({
-            recorded_at: -1
+            recorded_at: 1
         })
         .then(health => {
             res.send(health);
@@ -38,7 +38,7 @@ exports.findAllByDeviceId = (req, res) => {
             device_id: req.params.device_id
         })
         .sort({
-            recorded_at: -1
+            recorded_at: 1
         })
         .then(health => {
             if (!health) {
@@ -67,7 +67,7 @@ exports.findLastByDeviceId = (req, res) => {
             device_id: req.params.device_id
         })
         .sort({
-            recorded_at: -1
+            recorded_at: 1
         })
         .then(health => {
             if (!health) {

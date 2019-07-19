@@ -5,7 +5,7 @@ exports.findAll = (req, res) => {
     Summary
         .find()
         .sort({
-            recorded_at: -1
+            recorded_at: 1
         })
         .then(summaries => {
             res.send(summaries);
@@ -38,7 +38,7 @@ exports.findAllByDeviceId = (req, res) => {
             device_id: req.params.device_id
         })
         .sort({
-            recorded_at: -1
+            recorded_at: 1
         })
         .then(summaries => {
             if (!summaries) {
@@ -67,7 +67,7 @@ exports.findLastByDeviceId = (req, res) => {
             device_id: req.params.device_id
         })
         .sort({
-            recorded_at: -1
+            recorded_at: 1
         })
         .then(summary => {
             if (!summary) {

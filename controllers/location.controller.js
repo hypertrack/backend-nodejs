@@ -5,7 +5,7 @@ exports.findAll = (req, res) => {
     Location
         .find()
         .sort({
-            recorded_at: -1
+            recorded_at: 1
         })
         .then(locations => {
             res.send(locations);
@@ -38,7 +38,7 @@ exports.findAllByDeviceId = (req, res) => {
             device_id: req.params.device_id
         })
         .sort({
-            recorded_at: -1
+            recorded_at: 1
         })
         .then(locations => {
             if (!locations) {
@@ -67,7 +67,7 @@ exports.findLastByDeviceId = (req, res) => {
             device_id: req.params.device_id
         })
         .sort({
-            recorded_at: -1
+            recorded_at: 1
         })
         .then(location => {
             if (!location) {
