@@ -1,7 +1,7 @@
 const Location = require('../models/location.model');
 
 // Retrieve all locations
-exports.findAll = (req, res) => {
+exports.findAll = (res) => {
     Location
         .find()
         .sort({

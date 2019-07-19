@@ -1,7 +1,7 @@
 const Device = require('../models/device.model');
 
 // Retrieve and return all devices from the database.
-exports.findAll = (req, res) => {
+exports.findAll = (res) => {
     Device.find()
         .then(devices => {
             res.send(devices);

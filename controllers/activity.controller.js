@@ -1,7 +1,7 @@
 const Activity = require('../models/activity.model');
 
 // Retrieve all activities
-exports.findAll = (req, res) => {
+exports.findAll = (res) => {
     Activity
         .find()
         .sort({
