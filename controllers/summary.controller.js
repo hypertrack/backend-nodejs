@@ -1,7 +1,7 @@
 const Summary = require('../models/summary.model');
 
 // Retrieve all summaries
-exports.findAll = (res) => {
+exports.findAll = (req, res) => {
     Summary
         .find()
         .sort({

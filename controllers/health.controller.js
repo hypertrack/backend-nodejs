@@ -1,7 +1,7 @@
 const Health = require('../models/health.model');
 
 // Retrieve all health updates
-exports.findAll = (res) => {
+exports.findAll = (req, res) => {
     Health
         .find()
         .sort({

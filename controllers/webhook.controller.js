@@ -15,14 +15,6 @@ exports.addSummary = (obj) => {
             start_datetime: obj.data.start_datetime,
             end_datetime: obj.data.end_datetime,
             segments: obj.data.segments
-        })
-        .then(() => {
-            res.status(201).send('Webhook: Summary created successfully');
-        })
-        .catch(() => {
-            return res.status(500).send({
-                message: "Webhook: Error creating summary: " + req.body
-            });
         });
 };
 
@@ -37,14 +29,6 @@ exports.addLocation = (obj) => {
             speed: obj.data.speed,
             location_accuracy: obj.data.location_accuracy,
             location: obj.data.location
-        })
-        .then(() => {
-            res.status(201).send('Webhook: Location update created successfully');
-        })
-        .catch(() => {
-            return res.status(500).send({
-                message: "Webhook: Error creating location update: " + req.body
-            });
         });
 };
 
@@ -56,14 +40,6 @@ exports.addActivity = (obj) => {
             device_id: obj.device_id,
             value: obj.data.value,
             location: obj.data.location
-        })
-        .then(() => {
-            res.status(201).send('Webhook: Activity update created successfully');
-        })
-        .catch(() => {
-            return res.status(500).send({
-                message: "Webhook: Error creating activity update: " + req.body
-            });
         });
 };
 
@@ -75,13 +51,5 @@ exports.addHealth = (obj) => {
             device_id: obj.device_id,
             value: obj.data.value,
             hint: obj.data.hint
-        })
-        .then(() => {
-            res.status(201).send('Webhook: Health update created successfully');
-        })
-        .catch(() => {
-            return res.status(500).send({
-                message: "Webhook: Error creating health update: " + req.body
-            });
         });
 };
