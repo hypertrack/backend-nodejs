@@ -26,6 +26,7 @@ module.exports = (app) => {
                         break;
                     case 'activity':
                         console.log('==== ACTIVITY UPDATE');
+                        webhook.addActivity(data);
                         break;
                     case 'health':
                         console.log('==== HEALTH UPDATE');

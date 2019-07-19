@@ -40,7 +40,16 @@ const DeviceSchema = new mongoose.Schema({
         "data": {
             "value": {
                 type: String
-            }
+            },
+            "location": {
+                "coordinates": {
+                    type: [Number]
+                },
+                "type": {
+                    type: String,
+                    default: "Point"
+                }
+            },
         },
         "recorded_at": {
             type: Date
