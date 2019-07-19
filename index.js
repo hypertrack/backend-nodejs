@@ -21,7 +21,7 @@ app.use(function(req, res, next){
 
 // setup Mongoose
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
-mongoose.set('debug', true);
+mongoose.set('debug', process.env.NODE_ENV !== production);
 
 // add routes
 require('./routes/device.route')(app);
