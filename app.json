@@ -18,7 +18,7 @@
         }
     },
     "repository": "https://github.com/hypertrack/sample-backend-nodejs",
-    "logo": "https://docs.hypertrack.com/images/logo.png",
+    "logo": "https://dashboard.hypertrack.com/assets/hypertrack-bw.svg",
     "keywords": [
         "sample",
         "hypertrack",
