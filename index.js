@@ -29,6 +29,9 @@ require('./routes/location.route')(app);
 require('./routes/summary.route')(app);
 require('./routes/webhook.route')(app);
 
+// welcome URL for Heroku
+app.get('/welcome', (req, res) => res.send('Hello from HyperTrack!'));
+
 // start server
 http.listen(process.env.PORT || 8080, function(){
   console.log(`listening on *:${process.env.PORT || 8080}`);

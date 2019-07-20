@@ -1,6 +1,22 @@
 {
     "name": "Sample Backend NodeJS",
+    "website": "https://www.hypertrack.com/",
+    "success_url": "/welcome",
     "description": "Sample NodeJS server integration for Placeline application",
+    "addons": ["mongolab:sandbox", "papertrail:choklad"],
+    "buildpacks": [{
+        "url": "heroku/nodejs"
+    }],
+    "env": {
+        "HT_ACCOUNT_ID": {
+            "description": "Your HyperTrack AccountId from https://dashboard.hypertrack.com/setup",
+            "value": ""
+        },
+        "HT_SECRET_KEY": {
+            "description": "Your HyperTrack SecretKey from https://dashboard.hypertrack.com/setup",
+            "value": ""
+        }
+    },
     "repository": "https://github.com/hypertrack/sample-backend-nodejs",
     "logo": "https://docs.hypertrack.com/images/logo.png",
     "keywords": [
