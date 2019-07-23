@@ -53,12 +53,7 @@ HealthSchema.post('save', function(doc) {
                 },
                 recorded_at: doc.recorded_at
             }
-        })
-        .then(res => {
-            console.log(res);
-        }).catch(err => {
-            console.log(err);
-        });;
+        });
   });
 
 module.exports = mongoose.model('Health', HealthSchema);
