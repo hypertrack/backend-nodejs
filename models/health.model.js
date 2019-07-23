@@ -37,6 +37,8 @@ HealthSchema.index({
 
 // update device health post save
 HealthSchema.post('save', function(doc) {
+
+    console.log('================================ >>>> HEALTH POST SAVE ACTION', doc);
     mongoose.model('Device').findOneAndUpdate(
         // filter: by device_id
         {
