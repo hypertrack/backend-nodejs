@@ -1,49 +1,52 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
 // Device schema
-const SummarySchema = new mongoose.Schema({
-    "device_id": {
-        type: String,
-        index: true,
-        required: true
+const SummarySchema = new mongoose.Schema(
+  {
+    device_id: {
+      type: String,
+      index: true,
+      required: true
     },
-    "recorded_at": {
-        type: Date,
-        // required: true
-        // TODO: Summaries don't have recorded_at ??
+    recorded_at: {
+      type: Date
+      // required: true
+      // TODO: Summaries don't have recorded_at ??
     },
-    "distance": {
-        type: Number
+    distance: {
+      type: Number
     },
-    "steps": {
-        type: Number
+    steps: {
+      type: Number
     },
-    "duration": {
-        type: Number
+    duration: {
+      type: Number
     },
-    "start_datetime": {
-        type: Date
+    start_datetime: {
+      type: Date
     },
-    "end_datetime": {
-        type: Date
+    end_datetime: {
+      type: Date
     },
-    "segments": {
-        type: [Object]
+    segments: {
+      type: [Object]
     },
-    "updatedAt": {
-        type: Date
+    updatedAt: {
+      type: Date
     },
-    "createdAt": {
-        type: Date
+    createdAt: {
+      type: Date
     }
-}, {
+  },
+  {
     // enable timestamps
     timestamps: true,
     // set collection name
-    collection: 'Summary'
-});
+    collection: "Summary"
+  }
+);
 
 // index device_id
 SummarySchema.index({ device_id: 1 });
 
-module.exports = mongoose.model('Summary', SummarySchema);
+module.exports = mongoose.model("Summary", SummarySchema);

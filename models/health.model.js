@@ -1,59 +1,61 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
 // Device schema
-const HealthSchema = new mongoose.Schema({
-    "device_id": {
-        type: String,
-        index: true,
-        required: true
+const HealthSchema = new mongoose.Schema(
+  {
+    device_id: {
+      type: String,
+      index: true,
+      required: true
     },
-    "recorded_at": {
-        type: Date,
-        required: true
+    recorded_at: {
+      type: Date,
+      required: true
     },
-    "value": {
-        type: String
+    value: {
+      type: String
     },
-    "hint": {
-        type: String
+    hint: {
+      type: String
     },
-    "updatedAt": {
-        type: Date
+    updatedAt: {
+      type: Date
     },
-    "createdAt": {
-        type: Date
+    createdAt: {
+      type: Date
     }
-}, {
+  },
+  {
     // enable timestamps
     timestamps: true,
     // set collection name
-    collection: 'Health'
-});
+    collection: "Health"
+  }
+);
 
 // index device_id
 HealthSchema.index({
-    device_id: 1
+  device_id: 1
 });
 
 // update device health post save
-HealthSchema.post('save', function(doc) {
-
-    console.log('================================ >>>> HEALTH POST SAVE ACTION', doc);
-    mongoose.model('Device').findOneAndUpdate(
-        // filter: by device_id
-        {
-            device_id: doc.device_id
+HealthSchema.post("save", function(doc) {
+  mongoose.model("Device").findOneAndUpdate(
+    // filter: by device_id
+    {
+      device_id: doc.device_id
+    },
+    // update: health data
+    {
+      device_health: {
+        data: {
+          value: doc.value,
+          hint: doc.hint
         },
-        // update: health data
-        {
-            device_health: {
-                data: {
-                    value: doc.value,
-                    hint: doc.hint,
-                },
-                recorded_at: doc.recorded_at
-            }
-        });
-  });
+        recorded_at: doc.recorded_at
+      }
+    }
+  );
+});
 
-module.exports = mongoose.model('Health', HealthSchema);
+module.exports = mongoose.model("Health", HealthSchema);
