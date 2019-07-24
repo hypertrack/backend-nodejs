@@ -5,6 +5,9 @@ module.exports = app => {
   app.post("/hypertrack", async function(req, res) {
     let webhookBody = JSON.parse(req.body);
 
+    // log request body
+    console.log(webhookBody);
+
     if (webhookBody) {
       for (let i = 0; i < webhookBody.length; i++) {
         let data = webhookBody[i];
