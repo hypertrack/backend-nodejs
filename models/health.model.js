@@ -54,7 +54,8 @@ HealthSchema.post("save", function(doc, next) {
             hint: doc.hint
           },
           recorded_at: doc.recorded_at
-        }
+        },
+        device_status: doc.value.includes("outage") ? "disconnected" : "active"
       }
     }
   );
