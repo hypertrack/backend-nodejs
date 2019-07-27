@@ -54,7 +54,7 @@ http.listen(process.env.PORT || 8080, function() {
       let bulkOps = [];
 
       // update all devices in mongoDB
-      var deviceCollection = require("./models/device.model").collection;
+      var deviceCollection = require("./models/device.model");
 
       devices.forEach(device => {
         let upsertDoc = {
