@@ -5,8 +5,6 @@ const DeviceSchema = new mongoose.Schema(
   {
     device_id: {
       type: String,
-      index: true,
-      unique: true,
       required: true
     },
     location: {
@@ -144,6 +142,11 @@ const DeviceSchema = new mongoose.Schema(
 );
 
 // index device_id
-DeviceSchema.index({ device_id: 1 });
+DeviceSchema.index(
+  {
+    device_id: 1
+  },
+  { unique: true }
+);
 
 module.exports = mongoose.model("Device", DeviceSchema);

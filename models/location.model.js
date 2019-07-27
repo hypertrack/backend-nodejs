@@ -5,7 +5,6 @@ const LocationSchema = new mongoose.Schema(
   {
     device_id: {
       type: String,
-      index: true,
       required: true
     },
     recorded_at: {
@@ -49,9 +48,13 @@ const LocationSchema = new mongoose.Schema(
 );
 
 // index device_id
-LocationSchema.index({
-  device_id: 1
-});
+LocationSchema.index(
+  {
+    device_id: 1,
+    recorded_at: -1
+  },
+  { unique: true }
+);
 
 // update device location post save
 LocationSchema.post("save", function(doc, next) {

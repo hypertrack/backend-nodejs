@@ -5,7 +5,6 @@ const ActivitySchema = new mongoose.Schema(
   {
     device_id: {
       type: String,
-      index: true,
       required: true
     },
     recorded_at: {
@@ -40,9 +39,13 @@ const ActivitySchema = new mongoose.Schema(
 );
 
 // index device_id
-ActivitySchema.index({
-  device_id: 1
-});
+ActivitySchema.index(
+  {
+    device_id: 1,
+    recorded_at: -1
+  },
+  { unique: true }
+);
 
 // update device activity post save
 ActivitySchema.post("save", function(doc, next) {

@@ -5,7 +5,6 @@ const SummarySchema = new mongoose.Schema(
   {
     device_id: {
       type: String,
-      index: true,
       required: true
     },
     recorded_at: {
@@ -47,6 +46,12 @@ const SummarySchema = new mongoose.Schema(
 );
 
 // index device_id
-SummarySchema.index({ device_id: 1 });
+SummarySchema.index(
+  {
+    device_id: 1,
+    recorded_at: -1
+  },
+  { unique: true }
+);
 
 module.exports = mongoose.model("Summary", SummarySchema);

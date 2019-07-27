@@ -5,7 +5,6 @@ const HealthSchema = new mongoose.Schema(
   {
     device_id: {
       type: String,
-      index: true,
       required: true
     },
     recorded_at: {
@@ -34,9 +33,13 @@ const HealthSchema = new mongoose.Schema(
 );
 
 // index device_id
-HealthSchema.index({
-  device_id: 1
-});
+HealthSchema.index(
+  {
+    device_id: 1,
+    recorded_at: -1
+  },
+  { unique: true }
+);
 
 // update device health post save
 HealthSchema.post("save", function(doc, next) {
@@ -57,6 +60,10 @@ HealthSchema.post("save", function(doc, next) {
         },
         device_status: doc.value.includes("outage") ? "disconnected" : "active"
       }
+    },
+    { new: true },
+    (err, doc) => {
+      console.log(err, doc);
     }
   );
 
