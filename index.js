@@ -61,7 +61,8 @@ http.listen(process.env.PORT || 8080, function() {
           updateOne: {
             filter: { device_id: device["device_id"] },
             update: device,
-            upsert: true
+            upsert: true,
+            setDefaultsOnInsert: true
           }
         };
         bulkOps.push(upsertDoc);
