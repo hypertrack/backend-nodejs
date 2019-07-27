@@ -40,8 +40,6 @@ HealthSchema.index({
 
 // update device health post save
 HealthSchema.post("save", function(doc, next) {
-  console.log(">>>>>>>>>>>>>> POST SAVE", doc);
-
   mongoose.model("Device").findOneAndUpdate(
     // filter: by device_id
     {
@@ -58,14 +56,6 @@ HealthSchema.post("save", function(doc, next) {
           recorded_at: doc.recorded_at
         }
       }
-    },
-    { new: true },
-    (err, doc) => {
-      if (err) {
-        console.log("Something wrong when updating data!");
-      }
-
-      console.log(">>>>>>>>>>>>>> POST SAVE UPDATED!!!", doc);
     }
   );
 

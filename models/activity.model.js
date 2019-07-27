@@ -45,7 +45,7 @@ ActivitySchema.index({
 });
 
 // update device activity post save
-ActivitySchema.post("save", function(doc) {
+ActivitySchema.post("save", function(doc, next) {
   mongoose.model("Device").findOneAndUpdate(
     // filter: by device_id
     {
@@ -53,15 +53,19 @@ ActivitySchema.post("save", function(doc) {
     },
     // update: activity data
     {
-      activity: {
-        data: {
-          value: doc.value,
-          location: doc.location
-        },
-        recorded_at: doc.recorded_at
+      $set: {
+        activity: {
+          data: {
+            value: doc.value,
+            location: doc.location
+          },
+          recorded_at: doc.recorded_at
+        }
       }
     }
   );
+
+  next();
 });
 
 module.exports = mongoose.model("Activity", ActivitySchema);
