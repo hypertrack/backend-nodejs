@@ -21,12 +21,8 @@ app.use(function(req, res, next) {
 
 // setup Mongoose
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useMongoClient: true
+  useNewUrlParser: true
 });
-
-// Use native promises
-mongoose.Promise = global.Promise;
 
 mongoose.set("debug", process.env.NODE_ENV !== "production");
 
