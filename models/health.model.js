@@ -39,11 +39,7 @@ HealthSchema.index({
 });
 
 // update device health post save
-HealthSchema.post("save", function(err, doc) {
-  if (err) {
-    throw err;
-  }
-
+HealthSchema.post("save", function(doc, next) {
   console.log(">>>>>>>>>>>>>> POST SAVE", doc);
 
   mongoose.model("Device").findOneAndUpdate(
@@ -72,6 +68,8 @@ HealthSchema.post("save", function(err, doc) {
       console.log(">>>>>>>>>>>>>> POST SAVE UPDATED!!!", doc);
     }
   );
+
+  next();
 });
 
 module.exports = mongoose.model("Health", HealthSchema);
