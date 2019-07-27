@@ -51,12 +51,14 @@ HealthSchema.post("save", function(err, doc) {
     },
     // update: health data
     {
-      device_health: {
-        data: {
-          value: doc.value,
-          hint: doc.hint
-        },
-        recorded_at: doc.recorded_at
+      $set: {
+        device_health: {
+          data: {
+            value: doc.value,
+            hint: doc.hint
+          },
+          recorded_at: doc.recorded_at
+        }
       }
     },
     { new: true },
