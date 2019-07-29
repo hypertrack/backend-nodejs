@@ -60,10 +60,6 @@ HealthSchema.post("save", function(doc, next) {
         },
         device_status: doc.value.includes("outage") ? "disconnected" : "active"
       }
-    },
-    { new: true },
-    (err, doc) => {
-      console.log(err, doc);
     }
   );
 

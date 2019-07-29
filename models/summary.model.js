@@ -45,13 +45,10 @@ const SummarySchema = new mongoose.Schema(
   }
 );
 
-// index device_id
-SummarySchema.index(
-  {
-    device_id: 1,
-    recorded_at: -1
-  },
-  { unique: true }
-);
+// index not possible without recorded_at
+SummarySchema.index({
+  device_id: 1,
+  recorded_at: -1
+});
 
 module.exports = mongoose.model("Summary", SummarySchema);
