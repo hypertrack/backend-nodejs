@@ -6,7 +6,7 @@ if (!AMQP_URL) process.exit(1);
 const WORKER_QUEUE = "worker-queue";
 
 const tripHelpers = require("../common/trips");
-let { createTripsForAllDevices, completeDailyTripsForallDevices } = tripHelpers;
+let { completeDailyTripsForallDevices, createTripsForAllDevices } = tripHelpers;
 
 // Create a new connection manager from AMQP
 var connection = amqp.connect([AMQP_URL]);

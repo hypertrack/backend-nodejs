@@ -45,7 +45,7 @@ http.listen(process.env.PORT || 8080, function() {
   ).toString("base64");
   const auth = `Basic ${base64auth}`;
   const options = {
-    url: "https://v3.api.hypertrack.com/live",
+    url: "https://v3.api.hypertrack.com/devices",
     headers: {
       Authorization: auth
     }
