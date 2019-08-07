@@ -24,10 +24,6 @@ module.exports = app => {
             console.log("==== SUMMARY UPDATE");
             webhook.addSummary(data);
             break;
-          case "activity":
-            console.log("==== ACTIVITY UPDATE");
-            webhook.addActivity(data);
-            break;
           case "device_status":
             console.log("==== DEVICE STATUS UPDATE");
             webhook.addDeviceStatus(data);

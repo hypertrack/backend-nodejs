@@ -1,6 +1,5 @@
 const Summary = require("../models/summary.model");
 const Location = require("../models/location.model");
-const Activity = require("../models/activity.model");
 const DeviceStatus = require("../models/device-status.model");
 const BatteryStatus = require("../models/battery-status.model");
 
@@ -28,16 +27,6 @@ exports.addLocation = obj => {
     speed: obj.data.speed,
     accuracy: obj.data.accuracy,
     geometry: obj.data.geometry
-  });
-};
-
-// Add activity update
-exports.addActivity = obj => {
-  Activity.create({
-    recorded_at: obj.recorded_at,
-    device_id: obj.device_id,
-    value: obj.data.value,
-    location: obj.data.location
   });
 };
 
