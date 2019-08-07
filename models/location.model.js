@@ -28,8 +28,7 @@ const LocationSchema = new mongoose.Schema(
         type: [Number]
       },
       type: {
-        type: String,
-        default: "Point"
+        type: String
       }
     },
     updatedAt: {

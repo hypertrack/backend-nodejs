@@ -34,16 +34,14 @@ const TripSchema = new mongoose.Schema(
     destination: {
       geometry: {
         type: {
-          type: String,
-          default: "Point"
+          type: String
         },
         coordinates: {
           type: [Number]
         }
       },
       radius: {
-        type: Number,
-        default: 30
+        type: Number
       },
       scheduled_at: {
         type: Date

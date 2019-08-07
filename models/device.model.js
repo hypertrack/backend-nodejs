@@ -19,8 +19,7 @@ const DeviceSchema = new mongoose.Schema(
       },
       geometry: {
         type: {
-          type: String,
-          default: "Point"
+          type: String
         },
         coordinates: {
           type: [Number]
