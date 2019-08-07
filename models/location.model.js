@@ -11,8 +11,8 @@ const LocationSchema = new mongoose.Schema(
       type: Date,
       required: true
     },
-    altitude: {
-      type: Number
+    created_at: {
+      type: Date
     },
     bearing: {
       type: Number
@@ -20,10 +20,10 @@ const LocationSchema = new mongoose.Schema(
     speed: {
       type: Number
     },
-    location_accuracy: {
+    accuracy: {
       type: Number
     },
-    location: {
+    geometry: {
       coordinates: {
         type: [Number]
       },
@@ -66,13 +66,10 @@ LocationSchema.post("save", function(doc, next) {
     {
       $set: {
         location: {
-          data: {
-            speed: doc.speed,
-            altitude: doc.altitude,
-            location_accuracy: doc.location_accuracy,
-            bearing: doc.bearing,
-            location: doc.location
-          },
+          speed: doc.speed,
+          accuracy: doc.accuracy,
+          bearing: doc.bearing,
+          geometry: doc.geometry,
           recorded_at: doc.recorded_at
         }
       }

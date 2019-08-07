@@ -1,4 +1,5 @@
 var request = require("request");
+var _ = require("lodash");
 require("dotenv").config();
 
 function createTripsForAllDevices() {
@@ -115,15 +116,18 @@ function updateAllTrips() {
       var tripCollection = require("../models/trip.model");
 
       trips.forEach(trip => {
-        let upsertDoc = {
-          updateOne: {
-            filter: { trip_id: trip["trip_id"] },
-            update: trip,
-            upsert: true,
-            setDefaultsOnInsert: true
-          }
-        };
-        bulkOps.push(upsertDoc);
+        // complete only daily scheduled trips
+        if (_.get(trip, "metadata.scheduled", false)) {
+          let upsertDoc = {
+            updateOne: {
+              filter: { trip_id: trip["trip_id"] },
+              update: trip,
+              upsert: true,
+              setDefaultsOnInsert: true
+            }
+          };
+          bulkOps.push(upsertDoc);
+        }
       });
 
       if (bulkOps.length > 0) {
