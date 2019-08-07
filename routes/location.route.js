@@ -10,6 +10,6 @@ module.exports = app => {
   // Retrieve all locations for a device_id
   app.get("/locations/:device_id", locations.findAllByDeviceId);
 
-  // Retrieve all locations for a device_id
+  // Retrieve last location for a device_id
   app.get("/locations/:device_id/last", locations.findLastByDeviceId);
 };

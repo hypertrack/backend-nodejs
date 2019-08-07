@@ -36,6 +36,9 @@ const DeviceSchema = new mongoose.Schema(
         },
         activity: {
           type: String
+        },
+        reason: {
+          type: String
         }
       },
       value: {

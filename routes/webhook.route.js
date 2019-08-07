@@ -28,9 +28,9 @@ module.exports = app => {
             console.log("==== ACTIVITY UPDATE");
             webhook.addActivity(data);
             break;
-          case "health":
-            console.log("==== HEALTH UPDATE");
-            webhook.addHealth(data);
+          case "device_status":
+            console.log("==== DEVICE STATUS UPDATE");
+            webhook.addDeviceStatus(data);
             break;
           case "trip":
             console.log("==== TRIP UPDATE");

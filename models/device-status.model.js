@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 // Device schema
-const HealthSchema = new mongoose.Schema(
+const DeviceStatusSchema = new mongoose.Schema(
   {
     device_id: {
       type: String,
@@ -11,10 +11,16 @@ const HealthSchema = new mongoose.Schema(
       type: Date,
       required: true
     },
+    created_at: {
+      type: Date
+    },
     value: {
       type: String
     },
-    hint: {
+    activity: {
+      type: String
+    },
+    reason: {
       type: String
     },
     updatedAt: {
@@ -28,12 +34,12 @@ const HealthSchema = new mongoose.Schema(
     // enable timestamps
     timestamps: true,
     // set collection name
-    collection: "Health"
+    collection: "DeviceStatus"
   }
 );
 
 // index device_id
-HealthSchema.index(
+DeviceStatusSchema.index(
   {
     device_id: 1,
     recorded_at: -1
@@ -41,24 +47,24 @@ HealthSchema.index(
   { unique: true }
 );
 
-// update device health post save
-HealthSchema.post("save", function(doc, next) {
+// update device status post save
+DeviceStatusSchema.post("save", function(doc, next) {
   mongoose.model("Device").findOneAndUpdate(
     // filter: by device_id
     {
       device_id: doc.device_id
     },
-    // update: health data
+    // update: statu data
     {
       $set: {
-        device_health: {
+        device_status: {
           data: {
-            value: doc.value,
-            hint: doc.hint
+            recorded_at: doc.recorded_at,
+            activity: doc.activity,
+            reason: doc.reason
           },
-          recorded_at: doc.recorded_at
-        },
-        device_status: doc.value.includes("outage") ? "disconnected" : "active"
+          value: doc.value
+        }
       }
     }
   );
@@ -66,4 +72,4 @@ HealthSchema.post("save", function(doc, next) {
   next();
 });
 
-module.exports = mongoose.model("Health", HealthSchema);
+module.exports = mongoose.model("DeviceStatus", DeviceStatusSchema);

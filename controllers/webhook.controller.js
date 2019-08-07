@@ -1,7 +1,7 @@
 const Summary = require("../models/summary.model");
 const Location = require("../models/location.model");
 const Activity = require("../models/activity.model");
-const Health = require("../models/health.model");
+const DeviceStatus = require("../models/device-status.model");
 
 // Add summary
 exports.addSummary = obj => {
@@ -40,12 +40,14 @@ exports.addActivity = obj => {
   });
 };
 
-// Add health update
-exports.addHealth = obj => {
-  Health.create({
+// Add device status update
+exports.addDeviceStatus = obj => {
+  DeviceStatus.create({
     recorded_at: obj.recorded_at,
+    created_at: obj.created_at,
     device_id: obj.device_id,
     value: obj.data.value,
-    hint: obj.data.hint
+    activity: obj.data.activity,
+    reason: obj.data.reason
   });
 };
