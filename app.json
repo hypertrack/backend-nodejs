@@ -3,7 +3,7 @@
   "website": "https://www.hypertrack.com/",
   "success_url": "/welcome",
   "description": "Sample NodeJS server integration for Placeline application",
-  "addons": ["mongolab:sandbox", "papertrail:choklad"],
+  "addons": ["mongolab:sandbox", "papertrail:choklad", "cloudamqp:lemur"],
   "buildpacks": [
     {
       "url": "heroku/nodejs"
