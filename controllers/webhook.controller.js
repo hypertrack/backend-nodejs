@@ -2,6 +2,7 @@ const Summary = require("../models/summary.model");
 const Location = require("../models/location.model");
 const Activity = require("../models/activity.model");
 const DeviceStatus = require("../models/device-status.model");
+const BatteryStatus = require("../models/battery-status.model");
 
 // Add summary
 exports.addSummary = obj => {
@@ -49,5 +50,15 @@ exports.addDeviceStatus = obj => {
     value: obj.data.value,
     activity: obj.data.activity,
     reason: obj.data.reason
+  });
+};
+
+// Add battery status update
+exports.addBatteryStatus = obj => {
+  BatteryStatus.create({
+    recorded_at: obj.recorded_at,
+    created_at: obj.created_at,
+    device_id: obj.device_id,
+    value: obj.data.value
   });
 };

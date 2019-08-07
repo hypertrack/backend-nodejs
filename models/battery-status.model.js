@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
-// Device status schema
-const DeviceStatusSchema = new mongoose.Schema(
+// Battery status schema
+const BatteryStatusSchema = new mongoose.Schema(
   {
     device_id: {
       type: String,
@@ -17,12 +17,6 @@ const DeviceStatusSchema = new mongoose.Schema(
     value: {
       type: String
     },
-    activity: {
-      type: String
-    },
-    reason: {
-      type: String
-    },
     updatedAt: {
       type: Date
     },
@@ -34,12 +28,12 @@ const DeviceStatusSchema = new mongoose.Schema(
     // enable timestamps
     timestamps: true,
     // set collection name
-    collection: "DeviceStatus"
+    collection: "BatteryStatus"
   }
 );
 
 // index device_id
-DeviceStatusSchema.index(
+BatteryStatusSchema.index(
   {
     device_id: 1,
     recorded_at: -1
@@ -48,7 +42,7 @@ DeviceStatusSchema.index(
 );
 
 // update device status post save
-DeviceStatusSchema.post("save", function(doc, next) {
+BatteryStatusSchema.post("save", function(doc, next) {
   mongoose.model("Device").findOneAndUpdate(
     // filter: by device_id
     {
@@ -57,14 +51,7 @@ DeviceStatusSchema.post("save", function(doc, next) {
     // update: statu data
     {
       $set: {
-        device_status: {
-          data: {
-            recorded_at: doc.recorded_at,
-            activity: doc.activity,
-            reason: doc.reason
-          },
-          value: doc.value
-        }
+        battery: doc.value
       }
     }
   );
@@ -72,4 +59,4 @@ DeviceStatusSchema.post("save", function(doc, next) {
   next();
 });
 
-module.exports = mongoose.model("DeviceStatus", DeviceStatusSchema);
+module.exports = mongoose.model("BatteryStatus", BatteryStatusSchema);

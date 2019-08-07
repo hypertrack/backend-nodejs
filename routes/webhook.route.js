@@ -32,6 +32,9 @@ module.exports = app => {
             console.log("==== DEVICE STATUS UPDATE");
             webhook.addDeviceStatus(data);
             break;
+          case "battery":
+            console.log("==== BATTERY STATUS UPDATE");
+            webhook.addBatteryStatus(data);
           case "trip":
             console.log("==== TRIP UPDATE");
             break;
