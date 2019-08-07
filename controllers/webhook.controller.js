@@ -1,22 +1,7 @@
-const Summary = require("../models/summary.model");
 const Location = require("../models/location.model");
 const DeviceStatus = require("../models/device-status.model");
 const BatteryStatus = require("../models/battery-status.model");
 const TripStatus = require("../models/trip-status.model");
-
-// Add summary
-exports.addSummary = obj => {
-  Summary.create({
-    recorded_at: obj.recorded_at,
-    device_id: obj.device_id,
-    distance: obj.data.distance,
-    steps: obj.data.steps,
-    duration: obj.data.duration,
-    start_datetime: obj.data.start_datetime,
-    end_datetime: obj.data.end_datetime,
-    segments: obj.data.segments
-  });
-};
 
 // Add location update
 exports.addLocation = obj => {

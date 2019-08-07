@@ -20,10 +20,6 @@ module.exports = app => {
             console.log("==== LOCATION UPDATE");
             webhook.addLocation(data);
             break;
-          case "summary":
-            console.log("==== SUMMARY UPDATE");
-            webhook.addSummary(data);
-            break;
           case "device_status":
             console.log("==== DEVICE UPDATE");
             webhook.addDeviceStatus(data);

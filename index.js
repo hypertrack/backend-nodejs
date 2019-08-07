@@ -31,8 +31,11 @@ mongoose.set("debug", process.env.NODE_ENV !== "production");
 // add routes
 require("./routes/device.route")(app);
 require("./routes/location.route")(app);
-require("./routes/summary.route")(app);
+require("./routes/trip.route")(app);
 require("./routes/webhook.route")(app);
+require("./routes/battery-status.route")(app);
+require("./routes/device-status.route")(app);
+require("./routes/trip-status.route")(app);
 
 // welcome URL for Heroku
 app.get("/welcome", (req, res) => res.send("Hello from HyperTrack!"));
