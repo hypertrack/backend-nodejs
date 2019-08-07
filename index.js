@@ -5,7 +5,9 @@ var io = require("socket.io")(http);
 var bodyParser = require("body-parser");
 var cors = require("cors");
 var mongoose = require("mongoose");
-var request = require("request");
+
+var { updateAllDevices } = require("./common/devices");
+var { updateAllTrips } = require("./common/trips");
 
 // setup express
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,38 +42,8 @@ http.listen(process.env.PORT || 8080, function() {
   console.log(`listening on *:${process.env.PORT || 8080}`);
 
   // update all devices in DB using HyperTrack API
-  const base64auth = Buffer.from(
-    `${process.env.HT_ACCOUNT_ID}:${process.env.HT_SECRET_KEY}`
-  ).toString("base64");
-  const auth = `Basic ${base64auth}`;
-  const options = {
-    url: "https://v3.api.hypertrack.com/devices",
-    headers: {
-      Authorization: auth
-    }
-  };
+  updateAllDevices();
 
-  request(options, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
-      const devices = JSON.parse(body);
-      let bulkOps = [];
-
-      // update all devices in mongoDB
-      var deviceCollection = require("./models/device.model");
-
-      devices.forEach(device => {
-        let upsertDoc = {
-          updateOne: {
-            filter: { device_id: device["device_id"] },
-            update: device,
-            upsert: true,
-            setDefaultsOnInsert: true
-          }
-        };
-        bulkOps.push(upsertDoc);
-      });
-
-      deviceCollection.bulkWrite(bulkOps);
-    }
-  });
+  // update all trips in DB using HyperTrack API
+  updateAllTrips();
 });

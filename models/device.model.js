@@ -8,59 +8,22 @@ const DeviceSchema = new mongoose.Schema(
       required: true
     },
     location: {
-      data: {
-        speed: {
-          type: Number
-        },
-        altitude: {
-          type: Number
-        },
-        location_accuracy: {
-          type: Number
-        },
-        bearing: {
-          type: Number
-        },
-        location: {
-          type: {
-            type: String,
-            default: "Point"
-          },
-          coordinates: {
-            type: [Number]
-          }
-        }
+      speed: {
+        type: Number
       },
-      recorded_at: {
-        type: Date
-      }
-    },
-    activity: {
-      data: {
-        value: {
-          type: String
-        },
-        location: {
-          coordinates: {
-            type: [Number]
-          },
-          type: {
-            type: String,
-            default: "Point"
-          }
-        }
+      accuracy: {
+        type: Number
       },
-      recorded_at: {
-        type: Date
-      }
-    },
-    device_health: {
-      data: {
-        value: {
-          type: String
+      bearing: {
+        type: Number
+      },
+      geometry: {
+        type: {
+          type: String,
+          default: "Point"
         },
-        hint: {
-          type: String
+        coordinates: {
+          type: [Number]
         }
       },
       recorded_at: {
@@ -68,50 +31,15 @@ const DeviceSchema = new mongoose.Schema(
       }
     },
     device_status: {
-      type: String,
-      required: true
-    },
-    device_info: {
-      "has-play-services": {
-        type: Boolean
+      data: {
+        recorded_at: {
+          type: Date
+        },
+        activity: {
+          type: String
+        }
       },
-      "device-model": {
-        type: String
-      },
-      "os-version": {
-        type: String
-      },
-      "network-operator": {
-        type: String
-      },
-      "os-name": {
-        type: String
-      },
-      name: {
-        type: String
-      },
-      "recorded-at": {
-        type: String
-      },
-      "app-name": {
-        type: String
-      },
-      device_id: {
-        type: String
-      },
-      timezone: {
-        type: String
-      },
-      "sdk-version": {
-        type: String
-      },
-      "app-version-number": {
-        type: String
-      },
-      "device-brand": {
-        type: String
-      },
-      "os-hardware-identifier": {
+      value: {
         type: String
       }
     },
@@ -123,8 +51,37 @@ const DeviceSchema = new mongoose.Schema(
         type: String
       }
     },
-    metadata: {
+    battery: {
       type: String
+    },
+    device_info: {
+      os_name: {
+        type: String
+      },
+      timezone: {
+        type: String
+      },
+      device_brand: {
+        type: String
+      },
+      sdk_version: {
+        type: String
+      },
+      device_model: {
+        type: String
+      },
+      network_operator: {
+        type: String
+      },
+      name: {
+        type: String
+      },
+      os_version: {
+        type: String
+      }
+    },
+    metadata: {
+      type: Object
     },
     updatedAt: {
       type: Date

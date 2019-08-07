@@ -93,4 +93,48 @@ function completeDailyTripsForallDevices() {
   });
 }
 
-module.exports = { createTripsForAllDevices, completeDailyTripsForallDevices };
+function updateAllTrips() {
+  // get all trips using HyperTrack API
+  const base64auth = Buffer.from(
+    `${process.env.HT_ACCOUNT_ID}:${process.env.HT_SECRET_KEY}`
+  ).toString("base64");
+  const auth = `Basic ${base64auth}`;
+  let options = {
+    url: "https://v3.api.hypertrack.com/trips",
+    headers: {
+      Authorization: auth
+    }
+  };
+
+  request(options, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      const trips = JSON.parse(body);
+      let bulkOps = [];
+
+      // update all devices in mongoDB
+      var tripCollection = require("../models/trip.model");
+
+      trips.forEach(trip => {
+        let upsertDoc = {
+          updateOne: {
+            filter: { trip_id: trip["trip_id"] },
+            update: trip,
+            upsert: true,
+            setDefaultsOnInsert: true
+          }
+        };
+        bulkOps.push(upsertDoc);
+      });
+
+      if (bulkOps.length > 0) {
+        tripCollection.bulkWrite(bulkOps);
+      }
+    }
+  });
+}
+
+module.exports = {
+  createTripsForAllDevices,
+  completeDailyTripsForallDevices,
+  updateAllTrips
+};

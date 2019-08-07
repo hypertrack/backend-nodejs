@@ -92,4 +92,4 @@ typings/
 
 # Heroku
 /*.env
-.vscode/launch.json
+.vscode/

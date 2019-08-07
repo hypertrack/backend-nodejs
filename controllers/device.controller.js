@@ -35,3 +35,18 @@ exports.findOne = (req, res) => {
       });
     });
 };
+
+// Remove a single device using device_id
+exports.deleteOne = (req, res) => {
+  Device.deleteOne({ device_id: req.params.device_id })
+    .then(response => {
+      res.send(response);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: `Device with id ${
+          req.params.device_id
+        } could not be removed. Reason: ${err.message}`
+      });
+    });
+};
