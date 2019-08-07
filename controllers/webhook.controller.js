@@ -21,12 +21,12 @@ exports.addSummary = obj => {
 exports.addLocation = obj => {
   Location.create({
     recorded_at: obj.recorded_at,
+    created_at: obj.created_at,
     device_id: obj.device_id,
-    altitude: obj.data.altitude,
     bearing: obj.data.bearing,
     speed: obj.data.speed,
-    location_accuracy: obj.data.location_accuracy,
-    location: obj.data.location
+    accuracy: obj.data.accuracy,
+    geometry: obj.data.geometry
   });
 };
 
