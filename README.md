@@ -11,3 +11,12 @@ This project is set up to be deployed to Heroku within seconds.
 ## Trip Scheduler
 
 Tutorial: https://medium.com/@gbuszmicz/cron-jobs-in-node-js-with-heroku-5f3c808b4d57
+
+TODO:
+
+- [ ] Disable scheduler dynos by default
+
+```
+$ heroku ps:scale worker=1
+$ heroku ps:scale clock=1
+```

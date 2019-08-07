@@ -5,6 +5,10 @@ const AMQP_URL = process.env.CLOUDAMQP_URL || "amqp://localhost";
 if (!AMQP_URL) process.exit(1);
 
 const WORKER_QUEUE = "worker-queue"; // To consume from worker process
+
+// Production: Every day at 10 minutes past midnight > create trips, every day at midnight > complete trip
+// Local: Every minute > complete and create trips
+
 const JOBS = [
   {
     name: "Daily Trip Creation",
@@ -12,7 +16,8 @@ const JOBS = [
       taskName: "createTrips",
       queue: "worker-queue"
     },
-    cronTime: "* * * * *",
+    cronTime:
+      process.env.NODE_ENV === "production" ? "10 0 * * *" : "* * * * *",
     repeat: 1
   },
   {
@@ -21,14 +26,10 @@ const JOBS = [
       taskName: "completeTrips",
       queue: "worker-queue"
     },
-    cronTime: "* * * * *",
+    cronTime: process.env.NODE_ENV === "production" ? "0 0 * * *" : "* * * * *",
     repeat: 1
   }
 ];
-
-// TOOD: Replace the cronTime
-// Every day at 10 minutes past midnight > 10 0 * * *
-// Every day at midnight > 0 0 * * *
 
 // Create a new connection manager from AMQP
 var connection = amqp.connect([AMQP_URL]);
