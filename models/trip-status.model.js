@@ -12,11 +12,11 @@ const TripStatusSchema = new mongoose.Schema(
       required: true
     },
     recorded_at: {
-      type: Date,
-      required: true
+      type: Date
     },
     created_at: {
-      type: Date
+      type: Date,
+      required: true
     },
     value: {
       type: String
