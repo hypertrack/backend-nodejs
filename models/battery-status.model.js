@@ -36,7 +36,7 @@ const BatteryStatusSchema = new mongoose.Schema(
 BatteryStatusSchema.index(
   {
     device_id: 1,
-    recorded_at: -1
+    created_at: -1
   },
   { unique: true }
 );
