@@ -6,10 +6,37 @@ if (!AMQP_URL) process.exit(1);
 
 const WORKER_QUEUE = "worker-queue"; // To consume from worker process
 
-// Production: Every day at 10 minutes past midnight > create trips, every day at midnight > complete trip
-// Local: Every minute > complete and create trips
+// Production: Every day at 10 minutes past midnight > create trips, every day at midnight > complete trip, sync DB
+// Local: Every minute > complete, create trips, sync DB
 
 const JOBS = [
+  {
+    name: "Daily Trip Completion",
+    message: {
+      taskName: "completeTrips",
+      queue: "worker-queue"
+    },
+    cronTime: process.env.NODE_ENV === "production" ? "0 0 * * *" : "* * * * *",
+    repeat: 1
+  },
+  {
+    name: "Daily Trip DB Sync",
+    message: {
+      taskName: "syncTrips",
+      queue: "worker-queue"
+    },
+    cronTime: process.env.NODE_ENV === "production" ? "0 0 * * *" : "* * * * *",
+    repeat: 1
+  },
+  {
+    name: "Daily Device DB Sync",
+    message: {
+      taskName: "syncDevices",
+      queue: "worker-queue"
+    },
+    cronTime: process.env.NODE_ENV === "production" ? "0 0 * * *" : "* * * * *",
+    repeat: 1
+  },
   {
     name: "Daily Trip Creation",
     message: {
@@ -18,15 +45,6 @@ const JOBS = [
     },
     cronTime:
       process.env.NODE_ENV === "production" ? "10 0 * * *" : "* * * * *",
-    repeat: 1
-  },
-  {
-    name: "Daily Trip Completion",
-    message: {
-      taskName: "completeTrips",
-      queue: "worker-queue"
-    },
-    cronTime: process.env.NODE_ENV === "production" ? "0 0 * * *" : "* * * * *",
     repeat: 1
   }
 ];

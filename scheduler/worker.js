@@ -6,7 +6,14 @@ if (!AMQP_URL) process.exit(1);
 const WORKER_QUEUE = "worker-queue";
 
 const tripHelpers = require("../common/trips");
-let { completeDailyTripsForallDevices, createTripsForAllDevices } = tripHelpers;
+let {
+  completeDailyTripsForallDevices,
+  createTripsForAllDevices,
+  updateAllTrips
+} = tripHelpers;
+
+const deviceHelpers = require("../common/devices");
+let { updateAllDevices } = deviceHelpers;
 
 // Create a new connection manager from AMQP
 var connection = amqp.connect([AMQP_URL]);
@@ -67,6 +74,14 @@ function onMessage(data) {
 
     case "createTrips":
       createTripsForAllDevices();
+      break;
+
+    case "syncTrips":
+      updateAllTrips();
+      break;
+
+    case "syncDevices":
+      updateAllDevices();
       break;
 
     default:
