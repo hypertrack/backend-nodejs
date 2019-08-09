@@ -72,7 +72,7 @@ function completeDailyTripsForallDevices() {
 
       trips.forEach(trip => {
         // complete only daily scheduled trips
-        if (_.get(trip, "metadata.scheduled", false)) {
+        if (_.get(trip, "metadata.scheduled_trip", false)) {
           options = {
             url: `https://v3.api.hypertrack.com/trips/${trip.trip_id}/complete`,
             method: "POST",
