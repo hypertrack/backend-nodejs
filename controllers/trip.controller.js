@@ -22,6 +22,29 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Find all trips for a device by device_id
+exports.findAllForDevice = (req, res) => {
+  Trip.find({ device_id: req.params.device_id })
+    .then(trip => {
+      if (!trip) {
+        return res.status(404).send({
+          message: "Trips not found for device id " + req.params.device_id
+        });
+      }
+      res.send(trip);
+    })
+    .catch(err => {
+      if (err.kind === "ObjectId") {
+        return res.status(404).send({
+          message: "Trips not found for device id " + req.params.device_id
+        });
+      }
+      return res.status(500).send({
+        message: "Error retrieving trips for device id " + req.params.device_id
+      });
+    });
+};
+
 // Find a single trip with a trip_id
 exports.findOne = (req, res) => {
   Trip.findOne({ trip_id: req.params.trip_id })
