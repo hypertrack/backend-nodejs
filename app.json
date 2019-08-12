@@ -9,12 +9,6 @@
       "url": "heroku/nodejs"
     }
   ],
-  "formation": {
-    "web": {
-      "quantity": 1,
-      "size": "free"
-    }
-  },
   "env": {
     "HT_ACCOUNT_ID": {
       "description": "Your HyperTrack AccountId from https://dashboard.hypertrack.com/setup",
