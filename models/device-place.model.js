@@ -10,6 +10,9 @@ const DevicePlaceSchema = new mongoose.Schema(
     label: {
       type: String
     },
+    address: {
+      type: String
+    },
     coordinates: {
       lat: {
         type: Number
