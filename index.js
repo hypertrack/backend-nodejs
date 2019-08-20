@@ -36,6 +36,7 @@ require("./routes/webhook.route")(app);
 require("./routes/battery-status.route")(app);
 require("./routes/device-status.route")(app);
 require("./routes/trip-status.route")(app);
+require("./routes/device-place.route")(app);
 
 // welcome URL for Heroku
 app.get("/welcome", (req, res) => res.send("Hello from HyperTrack!"));
