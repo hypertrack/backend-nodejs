@@ -1,5 +1,28 @@
 const DevicePlace = require("../models/device-place.model");
 
+// Retrieve all places
+exports.findAll = (req, res) => {
+  DevicePlace.find()
+    .then(places => {
+      if (!places) {
+        return res.status(404).send({
+          message: "Places not found for any device"
+        });
+      }
+      res.send(places);
+    })
+    .catch(err => {
+      if (err.kind === "ObjectId") {
+        return res.status(404).send({
+          message: "Places not found for any device"
+        });
+      }
+      return res.status(500).send({
+        message: "Error retrieving places for any device"
+      });
+    });
+};
+
 // Retrieve all places with device_id
 exports.findAllByDeviceId = (req, res) => {
   DevicePlace.find({ device_id: req.params.device_id })

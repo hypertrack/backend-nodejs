@@ -1,6 +1,9 @@
 module.exports = app => {
   const devicePlace = require("../controllers/device-place.controller");
 
+  // Retrieve all places
+  app.get("/device-places", devicePlace.findAll);
+
   // Retrieve all places with device_id
   app.get("/device-places/:device_id", devicePlace.findAllByDeviceId);
 
