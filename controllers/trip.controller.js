@@ -1,11 +1,15 @@
 const Trip = require("../models/trip.model");
+const { createTrip } = require("../hypertrack/requests/trips");
 
 // Create a new trip
 exports.create = (req, res) => {
-  const newTrip = new Trip(req.body);
-  newTrip.save(err => {
-    if (err) return res.status(500).send(err);
-    return res.status(200).send(newTrip);
+  createTrip(req.body, resp => {
+    console.log(resp);
+    const newTrip = new Trip(resp);
+    newTrip.save(err => {
+      if (err) return res.status(500).send(err);
+      return res.status(200).send(newTrip);
+    });
   });
 };
 
