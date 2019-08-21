@@ -47,6 +47,39 @@ const TripSchema = new mongoose.Schema(
         type: Date
       }
     },
+    estimate: {
+      arrive_at: {
+        type: Date
+      },
+      route: {
+        distance: {
+          type: Number
+        },
+        duration: {
+          type: Number
+        },
+        remaining_duration: {
+          type: Number
+        },
+        start_address: {
+          type: String
+        },
+        end_address: {
+          type: String
+        },
+        polyline: {
+          type: {
+            type: String
+          },
+          coordinates: {
+            type: [[Number]]
+          }
+        }
+      },
+      reroutes_exceeded: {
+        type: Boolean
+      }
+    },
     summary: {
       distance: {
         type: Number

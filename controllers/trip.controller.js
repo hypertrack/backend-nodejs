@@ -4,8 +4,8 @@ const { createTrip } = require("../common/trips");
 // Create a new trip
 exports.create = (req, res) => {
   createTrip(req.body, resp => {
-    console.log(resp);
     const newTrip = new Trip(resp);
+    // store new trip in database
     newTrip.save(err => {
       if (err) return res.status(500).send(err);
       return res.status(200).send(newTrip);
