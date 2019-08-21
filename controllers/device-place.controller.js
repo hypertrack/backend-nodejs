@@ -79,7 +79,13 @@ exports.findOneByDeviceIdAndLabel = (req, res) => {
 exports.findOneAndUpdate = (req, res) => {
   DevicePlace.findOneAndUpdate(
     { device_id: req.params.device_id, label: req.params.label },
-    req.body
+    {
+      $set: {
+        address: req.body.address,
+        coordinates: req.body.coordinates
+      }
+    },
+    { upsert: true, new: true }
   )
     .then(place => {
       res.send(place);
