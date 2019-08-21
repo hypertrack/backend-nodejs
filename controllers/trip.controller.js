@@ -1,5 +1,24 @@
+const _ = require("lodash");
+
 const Trip = require("../models/trip.model");
 const { createTrip } = require("../common/trips");
+
+function path(a) {
+  var list = [];
+  (function(o, r) {
+    r = r || "";
+    if (typeof o != "object") {
+      return true;
+    }
+    for (var c in o) {
+      if (arguments.callee(o[c], r + "." + c)) {
+        list.push(`${r.substring(1)}.${c}`);
+      }
+    }
+    return false;
+  })(a);
+  return list;
+}
 
 // Create a new trip
 exports.create = (req, res) => {
@@ -15,7 +34,34 @@ exports.create = (req, res) => {
 
 // Retrieve and return all trips from the database.
 exports.findAll = (req, res) => {
-  Trip.find()
+  const { status, metadata } = req.query;
+  let metadataObj = null,
+    metaQuery = {};
+  let filterObj = {};
+
+  if (status) {
+    filterObj.status = status;
+  }
+
+  if (metadata) {
+    try {
+      metadataObj = {
+        metadata: JSON.parse(metadata)
+      };
+      metaQuery = path(metadataObj);
+
+      // convert to query params for MongoDB
+      for (let i = 0; i < metaQuery.length; i++) {
+        const elem = metaQuery[i];
+        filterObj[elem] = _.get(metadataObj, metaQuery[i]);
+      }
+    } catch (e) {
+      metadataObj = {};
+    }
+  }
+
+  // TODO implement filtering for sample app
+  Trip.find(filterObj)
     .then(trips => {
       res.send(trips);
     })
