@@ -1,5 +1,5 @@
 const Trip = require("../models/trip.model");
-const { createTrip } = require("../hypertrack/requests/trips");
+const { createTrip } = require("../common/trips");
 
 // Create a new trip
 exports.create = (req, res) => {
