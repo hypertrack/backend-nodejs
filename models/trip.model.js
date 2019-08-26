@@ -47,6 +47,24 @@ const TripSchema = new mongoose.Schema(
         type: Date
       }
     },
+    geofences: [
+      {
+        geometry: {
+          type: {
+            type: String
+          },
+          coordinates: {
+            type: [Number]
+          }
+        },
+        radius: {
+          type: Number
+        },
+        metadata: {
+          type: Object
+        }
+      }
+    ],
     estimate: {
       arrive_at: {
         type: Date
