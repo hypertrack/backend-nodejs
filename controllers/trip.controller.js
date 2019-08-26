@@ -60,7 +60,6 @@ exports.findAll = (req, res) => {
     }
   }
 
-  // TODO implement filtering for sample app
   Trip.find(filterObj)
     .then(trips => {
       res.send(trips);
