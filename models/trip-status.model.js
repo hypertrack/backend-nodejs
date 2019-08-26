@@ -62,7 +62,7 @@ TripStatusSchema.post("save", function(doc, next) {
     {
       $set: {
         status: doc.value === "completed" ? "completed" : "active",
-        summary: doc.summary === "completed" ? doc.summary : {}
+        summary: doc.value === "completed" ? doc.summary : {}
       }
     }
   );

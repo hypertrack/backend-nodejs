@@ -120,6 +120,27 @@ function completeDailyTripsForallDevices() {
   });
 }
 
+function completeTrip(tripId) {
+  // complete trip by trip_id using HyperTrack API
+  const base64auth = Buffer.from(
+    `${process.env.HT_ACCOUNT_ID}:${process.env.HT_SECRET_KEY}`
+  ).toString("base64");
+  const auth = `Basic ${base64auth}`;
+  let options = {
+    url: `https://v3.api.hypertrack.com/trips/${tripId}/complete`,
+    method: "POST",
+    headers: {
+      Authorization: auth
+    }
+  };
+
+  request(options, (error, response, body) => {
+    if (!error && response.statusCode === 202) {
+      console.log(`Trip marked as arrived was completed (ID: ${tripId})`);
+    }
+  });
+}
+
 function updateAllTrips() {
   // get all trips (completed and active) using HyperTrack API
   const base64auth = Buffer.from(
@@ -164,5 +185,6 @@ module.exports = {
   createTrip,
   createTripsForAllDevices,
   completeDailyTripsForallDevices,
-  updateAllTrips
+  updateAllTrips,
+  completeTrip
 };
