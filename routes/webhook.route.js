@@ -35,6 +35,8 @@ module.exports = app => {
             case "trip":
               console.log("==== TRIP UPDATE");
 
+              webhook.addTripStatus(data);
+
               if (_.get(data, "data.value", "") === "destination_arrival") {
                 // complete trip on arrival
                 completeTrip(data.data.trip_id);
@@ -45,7 +47,15 @@ module.exports = app => {
                 trip.addWithId(data.data.trip_id);
               }
 
-              webhook.addTripStatus(data);
+              if (_.get(data, "data.value", "") === "completed") {
+                // update trip in MongoDB
+                trip.updateTrip(data.data.trip_id, {
+                  status: "completed",
+                  summary: data.data.summary,
+                  estimate: null,
+                  completed_at: data.created_at
+                });
+              }
               break;
             default:
               break;

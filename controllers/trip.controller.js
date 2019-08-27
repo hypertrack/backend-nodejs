@@ -131,15 +131,29 @@ exports.findOne = (req, res) => {
 
 // Update a trip using trip_id (e.g. after complete)
 exports.findOneAndUpdate = (req, res) => {
-  Trip.findOneAndUpdate({ trip_id: req.params.trip_id }, req.body)
-    .then(trip => {
+  updateTrip(req.params.trip_id, req.body, (trip, error) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
       res.send(trip);
+    }
+  });
+};
+
+exports.updateTrip = (trip_id, body, callback) => {
+  Trip.findOneAndUpdate({ trip_id }, body)
+    .then(trip => {
+      if (callback) {
+        callback(trip);
+      }
     })
     .catch(err => {
-      res.status(500).send({
-        message: `Some error occurred while updating trip with id ${
-          req.params.trip_id
-        }. Reason: ${err.message}`
-      });
+      if (callback) {
+        callback(null, {
+          message: `Some error occurred while updating trip with id ${
+            req.params.trip_id
+          }. Reason: ${err.message}`
+        });
+      }
     });
 };
