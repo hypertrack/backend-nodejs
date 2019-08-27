@@ -2,8 +2,29 @@ var request = require("request");
 var _ = require("lodash");
 require("dotenv").config();
 
+function getTrip(tripId, callback) {
+  // get existing trip from HyperTrack API
+  const base64auth = Buffer.from(
+    `${process.env.HT_ACCOUNT_ID}:${process.env.HT_SECRET_KEY}`
+  ).toString("base64");
+  const auth = `Basic ${base64auth}`;
+  let options = {
+    url: `https://v3.api.hypertrack.com/trips/${tripId}`,
+    headers: {
+      Authorization: auth,
+      "Content-Type": "application/json"
+    }
+  };
+
+  request(options, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      callback(body);
+    }
+  });
+}
+
 function createTrip(tripBody, callback) {
-  // get all devices using HyperTrack API
+  // create new trip using HyperTrack API
   const base64auth = Buffer.from(
     `${process.env.HT_ACCOUNT_ID}:${process.env.HT_SECRET_KEY}`
   ).toString("base64");
@@ -18,7 +39,6 @@ function createTrip(tripBody, callback) {
     json: tripBody
   };
 
-  // create new trips for all devices
   request(options, (error, response, body) => {
     if (!error && response.statusCode == 201) {
       callback(body);
@@ -182,6 +202,7 @@ function updateAllTrips() {
 }
 
 module.exports = {
+  getTrip,
   createTrip,
   createTripsForAllDevices,
   completeDailyTripsForallDevices,

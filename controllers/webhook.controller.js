@@ -38,7 +38,7 @@ exports.addBatteryStatus = obj => {
   });
 };
 
-// Add battery status update
+// Add trip status update
 exports.addTripStatus = obj => {
   TripStatus.create({
     recorded_at: obj.recorded_at,

@@ -1,7 +1,7 @@
 const _ = require("lodash");
 
 const Trip = require("../models/trip.model");
-const { createTrip } = require("../common/trips");
+const { createTrip, getTrip } = require("../common/trips");
 
 function path(a) {
   var list = [];
@@ -23,6 +23,18 @@ function path(a) {
 // Create a new trip
 exports.create = (req, res) => {
   createTrip(req.body, resp => {
+    const newTrip = new Trip(resp);
+    // store new trip in database
+    newTrip.save(err => {
+      if (err) return res.status(500).send(err);
+      return res.status(200).send(newTrip);
+    });
+  });
+};
+
+// Add an existing trip from trip creation webhook
+exports.addWithId = tripId => {
+  getTrip(tripId, resp => {
     const newTrip = new Trip(resp);
     // store new trip in database
     newTrip.save(err => {
