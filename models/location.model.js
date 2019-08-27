@@ -73,6 +73,15 @@ LocationSchema.post("save", function(doc, next) {
           recorded_at: doc.recorded_at
         }
       }
+    },
+    // TODO: Remove - only used for troubleshooting
+    { new: true },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+      }
+
+      console.log(doc);
     }
   );
 
