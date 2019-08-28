@@ -6,14 +6,12 @@ module.exports = app => {
 
   // Receive HyperTrack webhooks
   app.post("/hypertrack", async function(req, res) {
+    console.log(req);
     let webhookBody = JSON.parse(req.body);
 
     if (webhookBody) {
       for (let i = 0; i < webhookBody.length; i++) {
         let data = webhookBody[i];
-
-        console.log(data);
-        // notify client
 
         // ignore other versions for now
         if (data.version === "2.0.0") {
