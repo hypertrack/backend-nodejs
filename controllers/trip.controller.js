@@ -35,7 +35,7 @@ exports.create = (req, res) => {
 // Add an existing trip from trip creation webhook
 exports.addWithId = tripId => {
   getTrip(tripId, resp => {
-    const newTrip = new Trip(resp);
+    const newTrip = new Trip(JSON.parse(resp));
     // store new trip in database
     newTrip.save(err => {
       if (err) return res.status(500).send(err);
