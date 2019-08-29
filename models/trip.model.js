@@ -79,10 +79,10 @@ const TripSchema = new mongoose.Schema(
         remaining_duration: {
           type: Number
         },
-        start_address: {
+        start_place: {
           type: String
         },
-        end_address: {
+        end_place: {
           type: String
         },
         polyline: {
@@ -108,10 +108,10 @@ const TripSchema = new mongoose.Schema(
       duration: {
         type: Number
       },
-      start_address: {
+      start_place: {
         type: String
       },
-      end_address: {
+      end_place: {
         type: String
       },
       start_datetime: {
