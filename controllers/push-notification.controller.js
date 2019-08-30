@@ -21,6 +21,22 @@ const push = new PushService({
 });
 
 exports.sendNotification = (device_id, payload, res) => {
+  // continue only if all keys are set
+  if (
+    process.env.FCM_KEY !== "" &&
+    process.env.APN_CERT !== "" &&
+    process.env.APN_KEY_ID !== "" &&
+    process.env.APN_TEAM_ID !== ""
+  ) {
+    if (res) {
+      res.status(500).send({
+        message: `Push notifications are not configured on the backend`
+      });
+    }
+
+    return;
+  }
+
   // lookup device push first
   pushInfo.findOne({ device_id }).then(pushInfo => {
     if (pushInfo) {
@@ -43,45 +59,46 @@ exports.sendNotification = (device_id, payload, res) => {
         title = "Trip geofence enter";
       }
 
-      // send push notification
-      push
-        .send([pushInfo.push_token], {
-          title, // REQUIRED for Android
-          topic: pushInfo.app_name, // REQUIRED for iOS
-          body,
-          contentAvailable: true,
-          custom: payload
+      // store notification record
+      PushNotification.create({ ids: device_id, payload })
+        .then(() => {
+          // send push notification
+          push
+            .send([pushInfo.push_token], {
+              title, // REQUIRED for Android
+              topic: pushInfo.app_name, // REQUIRED for iOS
+              body,
+              contentAvailable: true,
+              custom: payload
+            })
+            .then(results => {
+              if (results) {
+                const responseText = `Push notification for id '${
+                  pushInfo.push_token
+                }' and app '${pushInfo.app_name}' stored. Notification push ${
+                  _.get(results, "[0].success", 0) === 1 ? "succeded" : "failed"
+                }`;
+
+                if (res) {
+                  res.status(201).send({ message: responseText });
+                }
+
+                console.log(responseText);
+              }
+            });
         })
-        .then(results => {
-          if (results) {
-            const responseText = `Push notification for id '${
-              pushInfo.push_token
-            }' and app '${pushInfo.app_name}' stored. Notification push ${
-              _.get(results, "[0].success", 0) === 1 ? "succeded" : "failed"
-            }`;
-
-            if (res) {
-              res.status(201).send({ message: responseText });
-            }
-
-            console.log(responseText);
+        .catch(err => {
+          if (res) {
+            return res.status(500).send({
+              message: `Error creating push notification: ${err}`
+            });
           }
+          console.log(`Error creating push notification: ${err}`);
         });
     }
   });
 };
 
 exports.addOne = (req, res) => {
-  const { ids, payload } = req.body;
-  // store notification record
-  PushNotification.create({ ids, payload })
-    .then(() => {
-      // send push notification
-      this.sendNotification(ids, payload, res);
-    })
-    .catch(err => {
-      return res.status(500).send({
-        message: `Error creating push notification: ${err}`
-      });
-    });
+  this.sendNotification(req.body.ids, req.body.payload, res);
 };

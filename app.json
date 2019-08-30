@@ -17,6 +17,22 @@
     "HT_SECRET_KEY": {
       "description": "Your HyperTrack SecretKey from https://dashboard.hypertrack.com/setup",
       "value": ""
+    },
+    "FCM_KEY": {
+      "description": "Push Notifications (optional): Your Firebase Cloud Messaging Key, see more here: https://github.com/hypertrack/quickstart-android#enable-server-to-device-communication",
+      "value": ""
+    },
+    "APN_KEY_ID": {
+      "description": "Push Notifications (optional): Your Apple Push Notification (APN) Key ID, see more here: https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns",
+      "value": ""
+    },
+    "APN_CERT": {
+      "description": "Push Notifications (optional): Your Apple Push Notification (APN) authentication token signing key. Paste *.p8 file contents in the field. See more here: https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns",
+      "value": ""
+    },
+    "APN_TEAM_ID": {
+      "description": "Push Notifications (optional): Your Apple Developer account Team ID, see more here: https://www.mobiloud.com/help/knowledge-base/ios-app-transfer/",
+      "value": ""
     }
   },
   "repository": "https://github.com/hypertrack/sample-backend-nodejs",
