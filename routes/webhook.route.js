@@ -38,8 +38,10 @@ module.exports = app => {
               webhook.addTripStatus(data);
 
               if (_.get(data, "data.value", "") === "destination_arrival") {
-                // complete trip on arrival
-                completeTrip(data.data.trip_id);
+                // complete trip, 2 minutes after arrival
+                setTimeout(() => {
+                  completeTrip(data.data.trip_id);
+                }, 120000);
 
                 // send push notification to device
                 pushNotification.sendNotification(data.device_id, {
