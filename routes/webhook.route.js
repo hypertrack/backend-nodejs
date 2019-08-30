@@ -1,6 +1,7 @@
 module.exports = app => {
   const webhook = require("../controllers/webhook.controller");
   const trip = require("../controllers/trip.controller");
+  const pushNotification = require("../controllers/push-notification.controller");
   const { completeTrip } = require("../common/trips");
   const _ = require("lodash");
 
@@ -39,6 +40,33 @@ module.exports = app => {
               if (_.get(data, "data.value", "") === "destination_arrival") {
                 // complete trip on arrival
                 completeTrip(data.data.trip_id);
+
+                // send push notification to device
+                pushNotification.sendNotification(data.device_id, {
+                  placeline: {
+                    status: _.get(data, "data.value", ""),
+                    trip: {
+                      id: _.get(data, "data.trip_id"),
+                      metadata: _.get(data, "data.trip_metadata", {})
+                    }
+                  }
+                });
+              }
+
+              if (_.get(data, "data.value", "") === "geofence_enter") {
+                // send push notification to device
+                pushNotification.sendNotification(data.device_id, {
+                  placeline: {
+                    status: _.get(data, "data.value", ""),
+                    trip: {
+                      id: _.get(data, "data.trip_id"),
+                      metadata: _.get(data, "data.trip_metadata", {})
+                    },
+                    geofence: {
+                      metadata: _.get(data, "data.geofence_metadata")
+                    }
+                  }
+                });
               }
 
               if (_.get(data, "data.value", "") === "created") {
