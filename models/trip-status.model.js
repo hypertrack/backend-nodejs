@@ -42,15 +42,6 @@ const TripStatusSchema = new mongoose.Schema(
   }
 );
 
-// index trip_id
-TripStatusSchema.index(
-  {
-    trip_id: 1,
-    created_at: -1
-  },
-  { unique: true }
-);
-
 // update trip status post save
 TripStatusSchema.post("save", function(doc, next) {
   mongoose.model("Trip").findOneAndUpdate(

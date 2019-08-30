@@ -32,15 +32,6 @@ const BatteryStatusSchema = new mongoose.Schema(
   }
 );
 
-// index device_id
-BatteryStatusSchema.index(
-  {
-    device_id: 1,
-    created_at: -1
-  },
-  { unique: true }
-);
-
 // update device status post save
 BatteryStatusSchema.post("save", function(doc, next) {
   mongoose.model("Device").findOneAndUpdate(
