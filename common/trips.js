@@ -64,6 +64,12 @@ function createTripsForAllDevices() {
       const devices = JSON.parse(body);
 
       devices.forEach(device => {
+        // known bug: devices without location exposed in API
+        // skip devices without a location
+        if (!_.get(device, "location.recorded_at", false)) {
+          return;
+        }
+
         let tripBody = {
           device_id: device.device_id,
           metadata: {
