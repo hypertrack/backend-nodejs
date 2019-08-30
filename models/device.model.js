@@ -26,7 +26,8 @@ const DeviceSchema = new mongoose.Schema(
         }
       },
       recorded_at: {
-        type: Date
+        type: Date,
+        required: true
       }
     },
     device_status: {
