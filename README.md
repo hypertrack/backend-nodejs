@@ -19,7 +19,7 @@ With the capability of this project, you can build web or mobile Placeline apps 
 - Track all devices associated with your HyperTrack account on a world map with updates as they come in
 - Map all active trips with start/end places and geofences
 - Display all completed trips on a Placeline (time/location/activity series) and review relevant ones in more detail
-- Create expense reports with pre-filled fields such as: distance travelled, travel date, costs based on distance and rate, and description based on start and end places
+- Create expense reports with pre-filled fields such as: distance travelled, travel date/time, expenses based on distance and rate, and description based on start and end places
 
 > TODO: GIF with interactions on the dashboard
 
