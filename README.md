@@ -2,7 +2,7 @@
 
 A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It consumes the HyperTrack APIs and Webhooks and exposes them through REST API endpoints, Socket.io streams, and push notifications for front-end or mobile application usage.
 
-Features include:
+## Features
 
 - One-click deploy to Heroku (using ONLY free add-ons)
 - Synchronize all existing devices and trips on startup
