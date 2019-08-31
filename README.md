@@ -11,6 +11,8 @@ Features include:
 - Notify Websocket subscribers on webhook arrival using Socket.io
 - Send mobile device push notifications to Google's GCM and Apple's APN on webhook arrival
 - Set home and work places for devices
+- Review all device trips and select relevant ones for expense reports
+- One-click submission of expense report with pre-filled fields such as: distance travelled, travel date, costs based on distance and rate, and description based on start and end places
 
 > TODO: GIF with interactions on the dashboard
 
