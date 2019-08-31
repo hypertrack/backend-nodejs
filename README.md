@@ -11,7 +11,7 @@ Features include:
 - Send mobile device push notifications to Google's GCM and Apple's APN on webhook arrival
 - Set home and work places for devices
 
-<GIF with interactions on the dashboard>
+> TODO: GIF with interactions on the dashboard
 
 ## How it works
 
