@@ -2,6 +2,26 @@
 
 A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It consumes the HyperTrack APIs and Webhooks and exposes them through REST API endpoints, Socket.io streams, and push notifications for front-end or mobile application usage.
 
+## Overview
+
+- [HyperTrack: Sample Backend Integration](#hypertrack-sample-backend-integration)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Possibilities](#possibilities)
+  - [How it works](#how-it-works)
+  - [Requirements](#requirements)
+  - [Installation and setup](#installation-and-setup)
+    - [Local setup](#local-setup)
+    - [Heroku setup](#heroku-setup)
+  - [Usage](#usage)
+    - [REST API Endpoints](#rest-api-endpoints)
+    - [Webhooks](#webhooks)
+    - [Websockets](#websockets)
+    - [Push Notifications](#push-notifications)
+  - [Related](#related)
+  - [Credits](#credits)
+  - [License](#license)
+
 ## Features
 
 - One-click deploy to Heroku (using ONLY free add-ons)
@@ -14,14 +34,16 @@ A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It co
 
 ## Possibilities
 
-With the capability of this project, you can build web or mobile apps with features like:
+With the capability of this project, you can build web or mobile apps like Placeline:
+
+![](static/placeline.gif)
+
+Examples of potential features include:
 
 - Track all devices associated with your HyperTrack account on a world map with updates as they come in
 - Map all active trips with start/end places and geofences
 - Display all completed trips on a Placeline (time/location/activity series) and review relevant ones in more detail
 - Create expense reports with pre-filled fields such as: distance travelled, travel date/time, expenses based on distance and rate, and description based on start and end places
-
-> TODO: GIF with interactions on the dashboard
 
 ## How it works
 
