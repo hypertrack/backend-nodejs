@@ -1,4 +1,8 @@
-# HyperTrack: Sample Backend Integration
+<a href="https://www.hypertrack.com/">
+    <img src="https://www.hypertrack.com/green.eeca143346e01b96d600.svg" alt="HyperTrack logo" title="HyperTrack" align="right" height="40" />
+</a>
+
+# Sample Backend Integration
 
 ![](https://img.shields.io/circleci/build/gh/hypertrack/sample-backend-nodejs?style=flat-square)
 ![](https://img.shields.io/david/hypertrack/sample-backend-nodejs?style=flat-square)
@@ -8,7 +12,7 @@ A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It co
 
 ## Overview
 
-- [HyperTrack: Sample Backend Integration](#hypertrack-sample-backend-integration)
+- [Sample Backend Integration](#sample-backend-integration)
   - [Overview](#overview)
   - [Features](#features)
   - [Possibilities](#possibilities)
