@@ -10,11 +10,11 @@ A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It co
 - Store devices, trips, and all webhook records in MongoDB with Mongoose
 - Notify Websocket subscribers on webhook arrival using Socket.io
 - Send mobile device push notifications to Google's GCM and Apple's APN on webhook arrival
-- Set home and work places for devices
+- Set home and work places for devices (relevant for Placeline apps)
 
 ## Possibilities
 
-With the capability of this project, you can build web or mobile Placeline apps with features like:
+With the capability of this project, you can build web or mobile apps with features like:
 
 - Track all devices associated with your HyperTrack account on a world map with updates as they come in
 - Map all active trips with start/end places and geofences
@@ -41,7 +41,7 @@ Once started, the project will collect and store all available devices and trips
 
 The goal of this project is to get you to a deployed integration in minutes. For this to work, you need to have:
 
-- [ ] A HyperTrack account [here](https://dashboard.hypertrack.com/signup)
+- [ ] A HyperTrack account. [Get it here](https://dashboard.hypertrack.com/signup)
 - [ ] Your AccountId and SecretKey from the [HyperTrack Dashboard](https://dashboard.hypertrack.com/setup)
 - [ ] A [Heroku account](https://signup.heroku.com/) for deployment
 - [ ] (Optional) For mobile device Push Notifications: [Firebase Cloud Messaging key](https://github.com/hypertrack/quickstart-android#enable-server-to-device-communication), [APN Key ID](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns), [APN authentication token signing key](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns), and [Apple Developer account Team ID](https://www.mobiloud.com/help/knowledge-base/ios-app-transfer/)
@@ -134,6 +134,25 @@ Coming soon ...
 ### Websockets
 
 ### Push Notifications
+
+## Related
+
+This backend integration is built to be work seamlessly with the [Placeline web app](https://github.com/hypertrack/sample-frontend-nextjs) and the [Placeline scheduler](https://github.com/hypertrack/sample-scheduler-rabbitmq).
+
+## Credits
+
+This project uses the following open-source packages:
+
+- [body-parser](https://github.com/expressjs/body-parser): Node.js body parsing middleware
+- [cors](https://expressjs.com/en/resources/middleware/cors.html): Node.js CORS middleware
+- [dotenv](https://github.com/motdotla/dotenv): Load environment variables from .env files
+- [express](https://expressjs.com/): Web framework for Node.js
+- [localtunnel](https://github.com/localtunnel/localtunnel): Expose your localhost to the world for testing and sharing
+- [mongoose](https://mongoosejs.com/): Mongodb object modeling for node.js
+- [node-pushnotifications](https://github.com/appfeel/node-pushnotifications): Push notifications for GCM, APNS, MPNS, AMZ
+- [nodemon](https://github.com/remy/nodemon): Monitor for any changes in your node.js application and automatically restart the server
+- [request](https://github.com/request/request): Simplified HTTP client
+- [socket.io](https://github.com/socketio/socket.io): Realtime application framework
 
 ## License
 
