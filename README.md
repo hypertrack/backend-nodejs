@@ -210,9 +210,24 @@ The project uses [socket.io](https://github.com/socketio/socket.io) as ExpressJS
 
 With this middleware, the `io` instance is attached to every handler in the response object. This is used in the `/hypertrack` webhook handler to notify subscribed clients. Events are being emitted using the [webhook type](https://docs.hypertrack.com/#webhook) as event name (one of `location`, `device_status`, `battery` or `trip`) and the entire webhook payload as event payload.
 
-To subscribe to events triggered by webhooks, you can use the [socket.io-client](https://github.com/socketio/socket.io-client) project. You will need the server URL to connect appropriately.
+To subscribe to events triggered by webhooks, you can use the [socket.io-client](https://github.com/socketio/socket.io-client) project. You will need the server URL to connect appropriately. It is recommended to update the package.json configuration for the `dev` script to set a unqiue Localtunnel URL when testing locally): `lt --subdomain <alias> --port 8080 --open`. Here's a sample socket subscription:
 
-It is recommended to update the package.json configuration for the `dev` script to set a unqiue Localtunnel URL when testing locally): `lt --subdomain <alias> --port 8080 --open`.
+```html
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io(<SERVER_URL>);
+  socket.on('connect', function(){
+      console.log("Connected to server ...")
+  });
+  // listen to one of: location, device_status, battery or trip
+  socket.on('location', function(data){
+      console.log("Location data received: ", data)
+  });
+  socket.on('disconnect', function(){
+      console.log("Disconnected from server ...")
+  });
+</script>
+```
 
 ### Push Notifications
 
