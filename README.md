@@ -41,7 +41,9 @@ A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It co
 
 With the capability of this project, you can build web or mobile apps like Placeline:
 
-![](static/placeline.gif)
+<p align="center">
+  <img src="static/placeline.gif" />
+</p>
 
 Examples of potential features include:
 
@@ -194,6 +196,10 @@ ExpressJS exposes API endpoints based on the routes defined in the _/route_ fold
 
 ### Webhooks
 
+<p align="center">
+  <img src="static/sample-webhook.png" />
+</p>
+
 With the deployment of this project, you will have an endpoint listening to incoming webhooks. Depending on the deployment (local/Heroku/etc), your domain will change, but the available Webhook endpoint will end with `/hypertrack`. Here are samples of the full webhook URL that you will have to enter on the HyperTrack Dashboard:
 
 - Heroku: `https://<heroku_app_name>.herokuapp.com/hypertrack`
@@ -231,6 +237,10 @@ To subscribe to events triggered by webhooks, you can use the [socket.io-client]
 ```
 
 ### Push Notifications
+
+<p align="center">
+  <img src="static/sample-iphone-notification.png" />
+</p>
 
 The project is capable of sending mobile push notifications triggered by webhooks from HyperTrack. By default, notifications are pushed only for the trip updates: `destination_arrival` and `geofence_enter`.
 
