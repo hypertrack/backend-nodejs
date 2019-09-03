@@ -1,5 +1,9 @@
 # HyperTrack: Sample Backend Integration
 
+![](https://img.shields.io/circleci/build/gh/hypertrack/sample-backend-nodejs?style=flat-square)
+![](https://img.shields.io/david/hypertrack/sample-backend-nodejs?style=flat-square)
+![](https://img.shields.io/github/license/hypertrack/sample-backend-nodejs?style=flat-square)
+
 A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It consumes the HyperTrack APIs and Webhooks and exposes them through REST API endpoints, Socket.io streams, and push notifications for front-end or mobile application usage.
 
 ## Overview
