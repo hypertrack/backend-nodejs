@@ -48,7 +48,7 @@ Examples of potential features include:
 - Track all devices associated with your HyperTrack account on a world map with updates as they come in
 - Map all active trips with start/end places and geofences
 - Display all completed trips on a Placeline (time/location/activity series) and review relevant ones in more detail
-- Create expense reports with pre-filled fields such as: distance travelled, travel date/time, expenses based on distance and rate, and description based on start and end places
+- Create expense reports with pre-filled fields such as distance traveled, travel date/time, expenses based on distance and rate, and description based on start and end places
 
 ## How it works
 
@@ -57,7 +57,7 @@ The project uses the Model-Routes-Controllers pattern ([read more](https://devel
 - **/common**: Common functionality for HyperTrack API usage
 - **/controllers**: Handlers for all routes
 - **/models**: Mongoose Schema definitions for all relevant entities
-- **/routes**: Definition or available REST API endpoints
+- **/routes**: Definition of available REST API endpoints
 - **index.js**: Main entry point for ExpressJS, setup of the server (Socket.io, CORS, Mongoose), and sync of devices and trips through the HyperTrack API
 
 Once started, the project will collect and store all available devices and trips from the HyperTrack API. The Mongoose setup will ensure that missing collection definitions will be created. Once that is complete, the server will listen to HyperTrack Webhooks to come in. Every Webhook will create or update records in the database and execute related tasks (e.g. complete a trip from a trip completion webhook). Finally, Webhooks will be channeled to Websocket subscribers (if any) or to mobile apps using Push Notifications. The server will expose REST API endpoints in CRUD fashion for all available entities (trips, devices, etc).
@@ -71,7 +71,7 @@ The goal of this project is to get you to a deployed integration in minutes. For
 - [ ] A HyperTrack account. [Get it here](https://dashboard.hypertrack.com/signup)
 - [ ] Your AccountId and SecretKey from the [HyperTrack Dashboard](https://dashboard.hypertrack.com/setup)
 - [ ] A [Heroku account](https://signup.heroku.com/) for deployment
-- [ ] (Optional) For mobile device Push Notifications: [Firebase Cloud Messaging key](https://github.com/hypertrack/quickstart-android#enable-server-to-device-communication), [APN Key ID](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns), [APN authentication token signing key](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns), and [Apple Developer account Team ID](https://www.mobiloud.com/help/knowledge-base/ios-app-transfer/)
+- [ ] (Optional) For mobile device Push Notifications: [Firebase Cloud Messaging key](https://github.com/hypertrack/quickstart-android#enable-server-to-device-communication), [APN Key ID](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns), [APN authentication token signing key](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns), and [Apple Developer Account Team ID](https://www.mobiloud.com/help/knowledge-base/ios-app-transfer/)
 
 ## Installation and setup
 
@@ -89,7 +89,7 @@ npm install
 yarn
 ```
 
-Next, you need to set your environmental varibales. The project uses [dotenv](https://github.com/motdotla/dotenv), so it's best to create a `.env` file in the root folder of the project. This file is listed in `.gitignore` and shall not be checked into public repositories. Below is the content on the file - please ensure to replace the keys with your own:
+Next, you need to set your environmental variables. The project uses [dotenv](https://github.com/motdotla/dotenv), so it's best to create a `.env` file in the root folder of the project. This file is listed in `.gitignore` and shall not be checked into public repositories. Below is the content on the file - please ensure to replace the keys with your own:
 
 ```shell
 # HyperTrack
@@ -126,7 +126,7 @@ HyperTrack Placeline Backend is RUNNING
 
 ### Heroku setup
 
-This project is set up to be deployed to Heroku within seconds. You need a Heroku account. All you need to do is to click on the one-click-deploy button below. It will provision the following services and add-ons:
+This project is set up to be deployed to Heroku within seconds. You need a Heroku account. All you need to do is to click on the one-click-deploy button below. It will provide the following services and add-ons:
 
 - Web Dyno - to run the server on Heroku (free)
 - NodeJS buildpack - to run NodeJS/ExpressJS on Heroku (free)
@@ -140,9 +140,9 @@ Similar to the local setup, you need to have your keys ready before the deployme
 - `FCM_KEY`: Push Notifications (optional): Your Firebase Cloud Messaging Key. [Read more here](https://github.com/hypertrack/quickstart-android#enable-server-to-device-communication)
 - `APN_KEY_ID`: Push Notifications (optional): Your Apple Push Notification (APN) Key ID. [Read more here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns)
 - `APN_CERT`: Push Notifications (optional): Your Apple Push Notification (APN) authentication token signing key. Paste \*.p8 file contents in the field. [Read more here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns)
-- `APN_TEAM_ID`: Push Notifications (optional): Your Apple Developer account Team ID. [Read more here](https://www.mobiloud.com/help/knowledge-base/ios-app-transfer/)
+- `APN_TEAM_ID`: Push Notifications (optional): Your Apple Developer Account Team ID. [Read more here](https://www.mobiloud.com/help/knowledge-base/ios-app-transfer/)
 
-> _Note_: For `APN_CERT`, you have to use multiline variables (replace all new lines with `\n` and double quotes around the string). [Read more here](https://stackoverflow.com/a/46161404)
+> _Note_: For `APN_CERT`, you have to use multiline variables (replace all newlines with `\n` and double quotes around the string). [Read more here](https://stackoverflow.com/a/46161404)
 
 You need to enter all of these keys for the project to run successfully. Heroku uses the input to pre-set the environmental variables for the deployment. You can change after the setup as well.
 
@@ -158,7 +158,7 @@ The project exposes all devices and trip data through a variety of interfaces. B
 
 ExpressJS exposes API endpoints based on the routes defined in the _/route_ folder. Here is a breakdown of available routes, methods, and use cases.
 
-> _Note_: All the endpoints below respond with data from the MondoDB database, not directly from the HyperTrack API.
+> _Note_: All the endpoints below respond with data from the MongoDB database, not directly from the HyperTrack API.
 
 | Route                              | Methods     | Use Cases                                                                                          |
 | ---------------------------------- | ----------- | -------------------------------------------------------------------------------------------------- |
@@ -199,9 +199,9 @@ With the deployment of this project, you will have an endpoint listening to inco
 - Heroku: `https://<heroku_app_name>.herokuapp.com/hypertrack`
 - Localtunnel: `https://<alias>.localtunnel.me/hypertrack` (alias can be configured in the package.json)
 
-All webhooks will be processed and stored to the MongoDB. Some updates might update other database records (e.g. battery status update reflected in device records). It is important to note that `destination_arrival` [trip webhooks](https://docs.hypertrack.com/#trip-payload) will trigger [trip completion API calls](https://docs.hypertrack.com/#complete-trip) two minutes after the webhook arrival. You can change this behavior by modfying the `routes/webhook.route.js` file.
+All webhooks will be processed and stored to the MongoDB. Some updates might update other database records (e.g. battery status update reflected in device records). It is important to note that `destination_arrival` [trip webhooks](https://docs.hypertrack.com/#trip-payload) will trigger [trip completion API calls](https://docs.hypertrack.com/#complete-trip) two minutes after the webhook arrival. You can change this behavior by modifying the `routes/webhook.route.js` file.
 
-> _Note_: You can look into the console logs to review all received webhooks. This also allows you to run through the one-time verfication for HyperTrack Webhooks.
+> _Note_: You can look into the console logs to review all received webhooks. This also allows you to run through the one-time verification for HyperTrack Webhooks.
 
 ### Websockets
 
@@ -232,9 +232,9 @@ To subscribe to events triggered by webhooks, you can use the [socket.io-client]
 
 ### Push Notifications
 
-The project is capable ot sending mobile push notifications triggered by webhooks from HyperTrack. By default, notifications are pushed only for the trip updates: `destination_arrival` and `geofence_enter`.
+The project is capable of sending mobile push notifications triggered by webhooks from HyperTrack. By default, notifications are pushed only for the trip updates: `destination_arrival` and `geofence_enter`.
 
-> _Note_: Push attempts will only be made when required environmental varibales are defined. [Read more here](#installation-and-setup)
+> _Note_: Push attempts will only be made when required environment variables are defined. [Read more here](#installation-and-setup)
 
 Keep in mind that for push notifications to work properly, you have to manage push notification information (token, platform, package name associated with device ID) in your systems. To obtain this information, your mobile application has to be enabled for push notifications, store the push information, and make it accessible to this project.
 
