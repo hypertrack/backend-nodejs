@@ -161,6 +161,8 @@ ExpressJS exposes API endpoints based on the routes defined in the _/route_ fold
 
 | Route                              | Methods     | Use Cases                                                                                          |
 | ---------------------------------- | ----------- | -------------------------------------------------------------------------------------------------- |
+| /                                  | GET         | Status checking endpoint, returns plain text message                                               |
+|                                    |
 | /devices                           | GET         | Get all tracked [devices](https://docs.hypertrack.com/#api-devices)                                |
 | /devices/{device_id}               | GET, DELETE | Get/delete device by device ID                                                                     |
 | /devices/{device_id}/trips         | GET         | Get all [trips](https://docs.hypertrack.com/#api-trips) for specific device                        |
@@ -182,9 +184,11 @@ ExpressJS exposes API endpoints based on the routes defined in the _/route_ fold
 | /trip-status                       | GET, POST   | Get all or save new [trip status update](https://docs.hypertrack.com/#trip-payload)                |
 | /trip-status/{device_id}           | GET         | Get all trip status updates for specific trip                                                      |
 | /trip-status/{device_id}/last      | GET         | Get last trip status update for specific trip                                                      |
+|                                    |
 | /device-push-info                  | GET         | Get all device push information (including token, platform, package name)                          |
 | /device-push-info/{device_id}      | GET, DELETE | Get/delete device push information by device ID                                                    |
 | /push-notifications                | POST        | Create a new push notification record                                                              |
+|                                    |
 | /hypertrack                        | POST        | Endpoint to receive [HyperTrack Webhooks](https://docs.hypertrack.com/#webhooks). Read more below. |
 
 ### Webhooks
@@ -192,13 +196,23 @@ ExpressJS exposes API endpoints based on the routes defined in the _/route_ fold
 With the deployment of this project, you will have an endpoint listening to incoming webhooks. Depending on the deployment (local/Heroku/etc), your domain will change, but the available Webhook endpoint will end with `/hypertrack`. Here are samples of the full webhook URL that you will have to enter on the HyperTrack Dashboard:
 
 - Heroku: `https://<heroku_app_name>.herokuapp.com/hypertrack`
-- Localtunnel: `https://<alias>.localtunnel.me/hypertrack`
+- Localtunnel: `https://<alias>.localtunnel.me/hypertrack` (alias can be configured in the package.json)
 
 All webhooks will be processed and stored to the MongoDB. Some updates might update other database records (e.g. batter status update reflected in device records).
 
 > _Note_: You can look into the console logs to review all received webhooks. This also allows you to run through the one-time verfication for HyperTrack Webhooks.
 
 ### Websockets
+
+The project uses [socket.io](https://github.com/socketio/socket.io) as ExpressJS middleware. A connection is opened by default when the project is started up.
+
+> _Note_: The connection is unsecured by default. It's highly recommended to add an auth layer before going to production.
+
+With this middleware, the `io` instance is attached to every handler in the response object. This is used in the `/hypertrack` webhook handler to notify subscribed clients. Events are being emitted using the [webhook type](https://docs.hypertrack.com/#webhook) as event name (one of `location`, `device_status`, `battery` or `trip`) and the entire webhook payload as event payload.
+
+To subscribe to events triggered by webhooks, you can use the [socket.io-client](https://github.com/socketio/socket.io-client) project. You will need the server URL to connect appropriately.
+
+It is recommended to update the package.json configuration for the `dev` script to set a unqiue Localtunnel URL when testing locally): `lt --subdomain <alias> --port 8080 --open`.
 
 ### Push Notifications
 

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js & lt --subdomain hypertrack-backend-agraebe --port 8080 --open"
+    "dev": "nodemon index.js & lt --subdomain hypertrack-backend-sample --port 8080 --open"
   },
   "author": "Alexander Graebe <agraebe@hypertrack.com>",
   "license": "MIT",
