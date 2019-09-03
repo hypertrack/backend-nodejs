@@ -59,7 +59,7 @@ The project uses the Model-Routes-Controllers pattern ([read more](https://devel
 - **/routes**: Definition or available REST API endpoints
 - **index.js**: Main entry point for ExpressJS, setup of the server (Socket.io, CORS, Mongoose), and sync of devices and trips through the HyperTrack API
 
-Once started, the project will collect and store all available devices and trips from the HyperTrack API. The Mongoose setup will ensure that missing collection definitions will be created. Once that is complete, the server will listen to HyperTrack Webhooks to come in. Every Webhook will create a record in the database and execute related tasks (e.g. complete a trip from a trip completion webhook). Finally, Webhooks will be channeled to Websocket subscribers (if any) or to mobile apps using Push Notifications. The server will expose REST API endpoints in CRUD fashion for all available entities (trips, devices, etc).
+Once started, the project will collect and store all available devices and trips from the HyperTrack API. The Mongoose setup will ensure that missing collection definitions will be created. Once that is complete, the server will listen to HyperTrack Webhooks to come in. Every Webhook will create or update records in the database and execute related tasks (e.g. complete a trip from a trip completion webhook). Finally, Webhooks will be channeled to Websocket subscribers (if any) or to mobile apps using Push Notifications. The server will expose REST API endpoints in CRUD fashion for all available entities (trips, devices, etc).
 
 > _Note_: For the sake of simplicity, the Socket.io and REST API endpoints **do not** enforce any auth mechanisms. Before going into production, ensure to secure your server communication.
 
@@ -141,7 +141,7 @@ Similar to the local setup, you need to have your keys ready before the deployme
 - `APN_CERT`: Push Notifications (optional): Your Apple Push Notification (APN) authentication token signing key. Paste \*.p8 file contents in the field. [Read more here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns)
 - `APN_TEAM_ID`: Push Notifications (optional): Your Apple Developer account Team ID. [Read more here](https://www.mobiloud.com/help/knowledge-base/ios-app-transfer/)
 
-> _Note:_ For `APN_CERT`, you have to use multiline variables (replace all new lines with `\n` and double quotes around the string). [Read more here](https://stackoverflow.com/a/46161404)
+> _Note_: For `APN_CERT`, you have to use multiline variables (replace all new lines with `\n` and double quotes around the string). [Read more here](https://stackoverflow.com/a/46161404)
 
 You need to enter all of these keys for the project to run successfully. Heroku uses the input to pre-set the environmental variables for the deployment. You can change after the setup as well.
 
@@ -151,11 +151,52 @@ You need to enter all of these keys for the project to run successfully. Heroku 
 
 ## Usage
 
-Coming soon ...
+The project exposes all devices and trip data through a variety of interfaces. Below is an explanation of each interface, setup steps, and usage details.
 
 ### REST API Endpoints
 
+ExpressJS exposes API endpoints based on the routes defined in the _/route_ folder. Here is a breakdown of available routes, methods, and use cases.
+
+> _Note_: All the endpoints below respond with data from the MondoDB database, not directly from the HyperTrack API.
+
+| Route                              | Methods     | Use Cases                                                                                          |
+| ---------------------------------- | ----------- | -------------------------------------------------------------------------------------------------- |
+| /devices                           | GET         | Get all tracked [devices](https://docs.hypertrack.com/#api-devices)                                |
+| /devices/{device_id}               | GET, DELETE | Get/delete device by device ID                                                                     |
+| /devices/{device_id}/trips         | GET         | Get all [trips](https://docs.hypertrack.com/#api-trips) for specific device                        |
+| /trips                             | GET, POST   | Get all or create new trip                                                                         |
+| /trips/{trip_id}                   | GET, POST   | Get/update a trip by trip ID                                                                       |
+| /device-places                     | GET         | Get all places for all devices                                                                     |
+| /device-places/{device_id}         | GET         | Get all places for specific device                                                                 |
+| /device-places/{device_id}/{label} | GET, POST   | Get/set specific place (by label) for specific device                                              |
+|                                    |
+| /device-status                     | GET, POST   | Get all or save new [device status update](https://docs.hypertrack.com/#device-status-payload)     |
+| /device-status/{device_id}         | GET         | Get all device status updates for specific device                                                  |
+| /device-status/{device_id}/last    | GET         | Get last device status update for specific device                                                  |
+| /battery-status                    | GET, POST   | Get all or save new [battery status update](https://docs.hypertrack.com/#battery-payload)          |
+| /battery-status/{device_id}        | GET         | Get all battery status updates for specific device                                                 |
+| /battery-status/{device_id}/last   | GET         | Get last battery status update for specific device                                                 |
+| /locations                         | GET, POST   | Get all or save new [location update](https://docs.hypertrack.com/#location-payload)               |
+| /locations/{device_id}             | GET         | Get all location updates for specific device                                                       |
+| /locations/{device_id}/last        | GET         | Get last location update for specific device                                                       |
+| /trip-status                       | GET, POST   | Get all or save new [trip status update](https://docs.hypertrack.com/#trip-payload)                |
+| /trip-status/{device_id}           | GET         | Get all trip status updates for specific trip                                                      |
+| /trip-status/{device_id}/last      | GET         | Get last trip status update for specific trip                                                      |
+| /device-push-info                  | GET         | Get all device push information (including token, platform, package name)                          |
+| /device-push-info/{device_id}      | GET, DELETE | Get/delete device push information by device ID                                                    |
+| /push-notifications                | POST        | Create a new push notification record                                                              |
+| /hypertrack                        | POST        | Endpoint to receive [HyperTrack Webhooks](https://docs.hypertrack.com/#webhooks). Read more below. |
+
 ### Webhooks
+
+With the deployment of this project, you will have an endpoint listening to incoming webhooks. Depending on the deployment (local/Heroku/etc), your domain will change, but the available Webhook endpoint will end with `/hypertrack`. Here are samples of the full webhook URL that you will have to enter on the HyperTrack Dashboard:
+
+- Heroku: `https://<heroku_app_name>.herokuapp.com/hypertrack`
+- Localtunnel: `https://<alias>.localtunnel.me/hypertrack`
+
+All webhooks will be processed and stored to the MongoDB. Some updates might update other database records (e.g. batter status update reflected in device records).
+
+> _Note_: You can look into the console logs to review all received webhooks. This also allows you to run through the one-time verfication for HyperTrack Webhooks.
 
 ### Websockets
 
