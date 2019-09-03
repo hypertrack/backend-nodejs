@@ -19,7 +19,7 @@
     "heroku"
   ],
   "engines": {
-    "node": "10.x"
+    "node": ">=8"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
