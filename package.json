@@ -1,5 +1,5 @@
 {
-  "name": "sample-backend-nodejs",
+  "name": "backend-nodejs",
   "description": "Sample NodeJS server integration for Placeline application",
   "version": "1.0.0",
   "main": "index.js",
