@@ -92,9 +92,7 @@ function createTripsForAllDevices() {
           if (!error && response.statusCode == 201) {
             const trip = body;
             console.log(
-              `Trip created for device_id '${device.device_id}': ${
-                trip.trip_id
-              }`
+              `Trip created for device_id '${device.device_id}': ${trip.trip_id}`
             );
           }
         });
@@ -134,9 +132,7 @@ function completeDailyTripsForallDevices() {
           request(options, (error, response, body) => {
             if (!error && response.statusCode == 202) {
               console.log(
-                `Trip completed for device_id '${trip.device_id}': ${
-                  trip.trip_id
-                }`
+                `Trip completed for device_id '${trip.device_id}': ${trip.trip_id}`
               );
             }
           });
@@ -188,7 +184,7 @@ function updateAllTrips() {
       // update all trips in mongoDB
       var tripCollection = require("../models/trip.model");
 
-      if(trips) {
+      if (trips && Array.isArray(trips)) {
         trips.forEach(trip => {
           let upsertDoc = {
             updateOne: {
