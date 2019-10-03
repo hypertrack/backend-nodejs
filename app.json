@@ -1,7 +1,7 @@
 {
   "name": "Sample Backend NodeJS",
   "website": "https://www.hypertrack.com/",
-  "success_url": "/welcome",
+  "success_url": "/",
   "description": "Sample NodeJS server integration for Placeline application",
   "addons": ["mongolab:sandbox", "papertrail:choklad"],
   "buildpacks": [
