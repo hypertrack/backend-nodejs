@@ -83,6 +83,9 @@ const DeviceSchema = new mongoose.Schema(
         type: String
       }
     },
+    name: {
+      type: String
+    },
     metadata: {
       type: Object
     },
