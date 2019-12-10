@@ -36,7 +36,9 @@ exports.addBatteryStatus = obj => {
     recorded_at: obj.recorded_at,
     created_at: obj.created_at,
     device_id: obj.device_id,
-    value: obj.data.value
+    value: obj.data.value,
+    location: obj.location,
+    version: obj.version
   });
 };
 
