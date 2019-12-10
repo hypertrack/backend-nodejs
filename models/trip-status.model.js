@@ -11,9 +11,6 @@ const TripStatusSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    recorded_at: {
-      type: Date
-    },
     created_at: {
       type: Date,
       required: true
@@ -24,8 +21,14 @@ const TripStatusSchema = new mongoose.Schema(
     trip_metadata: {
       type: Object
     },
+    geofence_metadata: {
+      type: String
+    },
     summary: {
       type: Object
+    },
+    version: {
+      type: String
     },
     updatedAt: {
       type: Date

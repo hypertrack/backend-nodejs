@@ -46,12 +46,13 @@ exports.addBatteryStatus = obj => {
 // Add trip status update
 exports.addTripStatus = obj => {
   TripStatus.create({
-    recorded_at: obj.recorded_at,
     created_at: obj.created_at,
     device_id: obj.device_id,
     trip_id: obj.data.trip_id,
     value: obj.data.value,
     trip_metadata: obj.data.trip_metadata,
-    summary: obj.data.summary
+    geofence_metadata: obj.data.geofence_metadata,
+    summary: obj.data.summary,
+    version: obj.version
   });
 };
