@@ -89,6 +89,9 @@ const DeviceSchema = new mongoose.Schema(
     metadata: {
       type: Object
     },
+    registered_at: {
+      type: Date
+    },
     updatedAt: {
       type: Date
     },
