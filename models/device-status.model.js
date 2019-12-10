@@ -23,6 +23,17 @@ const DeviceStatusSchema = new mongoose.Schema(
     reason: {
       type: String
     },
+    location: {
+      coordinates: {
+        type: [Number]
+      },
+      type: {
+        type: String
+      }
+    },
+    version: {
+      type: String
+    },
     updatedAt: {
       type: Date
     },

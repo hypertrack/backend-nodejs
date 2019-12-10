@@ -24,7 +24,9 @@ exports.addDeviceStatus = obj => {
     device_id: obj.device_id,
     value: obj.data.value,
     activity: obj.data.activity,
-    reason: obj.data.reason
+    reason: obj.data.reason,
+    location: obj.location,
+    version: obj.version
   });
 };
 
