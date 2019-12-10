@@ -12,7 +12,8 @@ exports.addLocation = obj => {
     bearing: obj.data.bearing,
     speed: obj.data.speed,
     accuracy: obj.data.accuracy,
-    geometry: obj.data.geometry
+    geometry: obj.data.geometry,
+    version: obj.version
   });
 };
 
