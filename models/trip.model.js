@@ -45,6 +45,12 @@ const TripSchema = new mongoose.Schema(
       },
       scheduled_at: {
         type: Date
+      },
+      arrived_at: {
+        type: Date
+      },
+      exited_at: {
+        type: Date
       }
     },
     geofences: [
@@ -99,46 +105,161 @@ const TripSchema = new mongoose.Schema(
       }
     },
     summary: {
-      distance: {
-        type: Number
+      locations: {
+        type: {
+          type: String
+        },
+        coordinates: {
+          type: [String]
+        }
       },
-      steps: {
+      distance: {
         type: Number
       },
       duration: {
         type: Number
       },
-      start_place: {
-        type: String
-      },
-      end_place: {
-        type: String
-      },
-      start_datetime: {
+      started_at: {
         type: Date
       },
-      end_datetime: {
+      completed_at: {
         type: Date
       },
-      segments: [
+      device_id: {
+        type: String
+      },
+      markers: [
         {
           type: {
             type: String
           },
-          distance: {
-            type: Number
-          },
-          steps: {
-            type: Number
-          },
-          start_datetime: {
-            type: Date
-          },
-          end_datetime: {
-            type: Date
-          },
-          polyline: {
-            type: [[Number]]
+          data: {
+            value: {
+              type: String
+            },
+            start: {
+              recorded_at: {
+                type: Date
+              },
+              location: {
+                geometry: {
+                  type: {
+                    type: String
+                  },
+                  coordinates: {
+                    type: [Number]
+                  }
+                },
+                recorded_at: {
+                  type: Date
+                }
+              }
+            },
+            end: {
+              recorded_at: {
+                type: Date
+              },
+              location: {
+                geometry: {
+                  type: {
+                    type: String
+                  },
+                  coordinates: {
+                    type: [Number]
+                  }
+                },
+                recorded_at: {
+                  type: Date
+                }
+              }
+            },
+            reason: {
+              type: String
+            },
+            arrival: {
+              location: {
+                geometry: {
+                  type: {
+                    type: String
+                  },
+                  coordinates: {
+                    type: [Number]
+                  }
+                },
+                recorded_at: {
+                  type: Date
+                }
+              }
+            },
+            geofence: {
+              geometry: {
+                type: {
+                  type: String
+                },
+                coordinates: {
+                  type: [Number]
+                }
+              },
+              radius: {
+                type: Number
+              },
+              metadata: {
+                type: Object
+              }
+            },
+            route_to: {
+              duration: {
+                type: Number
+              },
+              distance: {
+                type: Number
+              },
+              start_location: {
+                geometry: {
+                  type: {
+                    type: String
+                  },
+                  coordinates: {
+                    type: [Number]
+                  }
+                },
+                recorded_at: {
+                  type: Date
+                }
+              }
+            },
+            exit: {
+              location: {
+                geometry: {
+                  type: {
+                    type: String
+                  },
+                  coordinates: {
+                    type: [Number]
+                  }
+                },
+                recorded_at: {
+                  type: Date
+                },
+                location: {
+                  type: {
+                    type: String
+                  },
+                  coordinates: {
+                    type: [Number]
+                  }
+                }
+              }
+            },
+            duration: {
+              type: Number
+            },
+            recorded_at: {
+              type: Date
+            },
+            metadata: {
+              type: Object
+            }
           }
         }
       ]
