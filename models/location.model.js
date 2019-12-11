@@ -31,6 +31,9 @@ const LocationSchema = new mongoose.Schema(
         type: String
       }
     },
+    version: {
+      type: String
+    },
     updatedAt: {
       type: Date
     },

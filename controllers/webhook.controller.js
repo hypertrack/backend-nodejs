@@ -12,7 +12,8 @@ exports.addLocation = obj => {
     bearing: obj.data.bearing,
     speed: obj.data.speed,
     accuracy: obj.data.accuracy,
-    geometry: obj.data.geometry
+    geometry: obj.data.geometry,
+    version: obj.version
   });
 };
 
@@ -24,7 +25,9 @@ exports.addDeviceStatus = obj => {
     device_id: obj.device_id,
     value: obj.data.value,
     activity: obj.data.activity,
-    reason: obj.data.reason
+    reason: obj.data.reason,
+    location: obj.location,
+    version: obj.version
   });
 };
 
@@ -34,19 +37,22 @@ exports.addBatteryStatus = obj => {
     recorded_at: obj.recorded_at,
     created_at: obj.created_at,
     device_id: obj.device_id,
-    value: obj.data.value
+    value: obj.data.value,
+    location: obj.location,
+    version: obj.version
   });
 };
 
 // Add trip status update
 exports.addTripStatus = obj => {
   TripStatus.create({
-    recorded_at: obj.recorded_at,
     created_at: obj.created_at,
     device_id: obj.device_id,
     trip_id: obj.data.trip_id,
     value: obj.data.value,
     trip_metadata: obj.data.trip_metadata,
-    summary: obj.data.summary
+    geofence_metadata: obj.data.geofence_metadata,
+    summary: obj.data.summary,
+    version: obj.version
   });
 };
