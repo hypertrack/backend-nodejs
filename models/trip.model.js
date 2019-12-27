@@ -110,7 +110,7 @@ const TripSchema = new mongoose.Schema(
           type: String
         },
         coordinates: {
-          type: [String]
+          type: [[String]]
         }
       },
       distance: {
