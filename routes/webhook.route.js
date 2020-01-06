@@ -7,6 +7,13 @@ module.exports = app => {
 
   // Receive HyperTrack webhooks
   app.post("/hypertrack", async function(req, res) {
+    /*
+    * For Webhook verification, you should log the request body here
+    * The reason is that the verification request is in XML, not JSON
+    * You can comment this out after the verification is completed
+    * Docs: https://docs.hypertrack.com/#guides-webhooks-setup-one-time-activation
+    */
+    // console.log(req.body);
     let webhookBody = JSON.parse(req.body);
 
     if (webhookBody) {
