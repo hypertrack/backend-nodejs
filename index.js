@@ -51,5 +51,5 @@ http.listen(process.env.PORT || 8080, function() {
   updateAllDevices();
 
   // update all trips in DB using HyperTrack API
-  updateAllTrips();
+  // updateAllTrips();
 });
