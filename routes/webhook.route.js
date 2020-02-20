@@ -1,18 +1,17 @@
 module.exports = app => {
   const webhook = require("../controllers/webhook.controller");
   const trip = require("../controllers/trip.controller");
-  const pushNotification = require("../controllers/push-notification.controller");
   const { completeTrip } = require("../common/trips");
   const _ = require("lodash");
 
   // Receive HyperTrack webhooks
   app.post("/hypertrack", async function(req, res) {
     /*
-    * For Webhook verification, you should log the request body here
-    * The reason is that the verification request is in XML, not JSON
-    * You can comment this out after the verification is completed
-    * Docs: https://docs.hypertrack.com/#guides-webhooks-setup-one-time-activation
-    */
+     * For Webhook verification, you should log the request body here
+     * The reason is that the verification request is in XML, not JSON
+     * You can comment this out after the verification is completed
+     * Docs: https://docs.hypertrack.com/#guides-webhooks-setup-one-time-activation
+     */
     // console.log(req.body);
     let webhookBody = JSON.parse(req.body);
 
@@ -45,32 +44,11 @@ module.exports = app => {
               webhook.addTripStatus(data);
 
               if (_.get(data, "data.value", "") === "destination_arrival") {
-                // send push notification to device
-                pushNotification.sendNotification(data.device_id, {
-                  placeline: {
-                    status: _.get(data, "data.value", ""),
-                    trip: {
-                      id: _.get(data, "data.trip_id"),
-                      metadata: _.get(data, "data.trip_metadata", {})
-                    }
-                  }
-                });
+                // action on destination arrival, e.g. push notification
               }
 
               if (_.get(data, "data.value", "") === "geofence_enter") {
-                // send push notification to device
-                pushNotification.sendNotification(data.device_id, {
-                  placeline: {
-                    status: _.get(data, "data.value", ""),
-                    trip: {
-                      id: _.get(data, "data.trip_id"),
-                      metadata: _.get(data, "data.trip_metadata", {})
-                    },
-                    geofence: {
-                      metadata: _.get(data, "data.geofence_metadata")
-                    }
-                  }
-                });
+                // action on geofence enter, e.g. push notification
               }
 
               if (_.get(data, "data.value", "") === "created") {

@@ -1,7 +1,6 @@
 require("dotenv").config();
 var app = require("express")();
 var http = require("http").createServer(app);
-var io = require("socket.io")(http);
 var bodyParser = require("body-parser");
 var cors = require("cors");
 var mongoose = require("mongoose");
@@ -14,12 +13,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.text({ type: "text/plain" }));
 app.use(cors());
-
-// setup socket.io
-app.use(function(req, res, next) {
-  res.io = io;
-  next();
-});
 
 // setup Mongoose
 mongoose.connect(process.env.MONGODB_URI, {
@@ -36,12 +29,9 @@ require("./routes/webhook.route")(app);
 require("./routes/battery-status.route")(app);
 require("./routes/device-status.route")(app);
 require("./routes/trip-status.route")(app);
-require("./routes/device-place.route")(app);
-require("./routes/push-notification.route")(app);
-require("./routes/device-push-info.route")(app);
 
 // welcome URL for Heroku
-app.get("/", (req, res) => res.send("HyperTrack Placeline Backend is RUNNING"));
+app.get("/", (req, res) => res.send("HyperTrack Backend is RUNNING"));
 
 // start server
 http.listen(process.env.PORT || 8080, function() {

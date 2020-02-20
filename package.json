@@ -1,6 +1,6 @@
 {
   "name": "backend-nodejs",
-  "description": "Sample NodeJS server integration for Placeline application",
+  "description": "Sample NodeJS server integration",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,6 @@
   "keywords": [
     "sample",
     "hypertrack",
-    "placeline",
     "integration",
     "mongodb",
     "mongoose",
@@ -28,10 +27,8 @@
     "express": "^4.17.1",
     "localtunnel": "^2.0.0",
     "mongoose": "^5.8.0",
-    "node-pushnotifications": "^1.2.0",
     "nodemon": "^2.0.1",
     "request": "^2.88.0",
-    "request-promise": "^4.2.5",
-    "socket.io": "^2.3.0"
+    "request-promise": "^4.2.5"
   }
 }
