@@ -136,25 +136,25 @@ ExpressJS exposes API endpoints based on the routes defined in the _/route_ fold
 | -------------------------------- | ----------- | -------------------------------------------------------------------------------------------------- |
 | /                                | GET         | Status checking endpoint, returns plain text message                                               |
 |                                  |
-| /devices                         | GET         | Get all tracked [devices](https://docs.hypertrack.com/#api-devices)                                |
+| /devices                         | GET         | Get all tracked [devices](https://www.hypertrack.com/docs/references/#references-apis-devices)                                |
 | /devices/{device_id}             | GET, DELETE | Get/delete device by device ID                                                                     |
-| /devices/{device_id}/trips       | GET         | Get all [trips](https://docs.hypertrack.com/#api-trips) for specific device                        |
+| /devices/{device_id}/trips       | GET         | Get all [trips](https://www.hypertrack.com/docs/references/#references-apis-trips) for specific device                        |
 | /trips                           | GET, POST   | Get all or create new trip                                                                         |
 | /trips/{trip_id}                 | GET, POST   | Get/update a trip by trip ID                                                                       |
-| /device-status                   | GET, POST   | Get all or save new [device status update](https://docs.hypertrack.com/#device-status-payload)     |
+| /device-status                   | GET, POST   | Get all or save new [device status update](https://www.hypertrack.com/docs/references/#references-webhooks-device-status-payload)     |
 | /device-status/{device_id}       | GET         | Get all device status updates for specific device                                                  |
 | /device-status/{device_id}/last  | GET         | Get last device status update for specific device                                                  |
-| /battery-status                  | GET, POST   | Get all or save new [battery status update](https://docs.hypertrack.com/#battery-payload)          |
+| /battery-status                  | GET, POST   | Get all or save new [battery status update](https://www.hypertrack.com/docs/references/#references-webhooks-battery-payload)          |
 | /battery-status/{device_id}      | GET         | Get all battery status updates for specific device                                                 |
 | /battery-status/{device_id}/last | GET         | Get last battery status update for specific device                                                 |
-| /locations                       | GET, POST   | Get all or save new [location update](https://docs.hypertrack.com/#location-payload)               |
+| /locations                       | GET, POST   | Get all or save new [location update](https://www.hypertrack.com/docs/references/#references-webhooks-location-payload)               |
 | /locations/{device_id}           | GET         | Get all location updates for specific device                                                       |
 | /locations/{device_id}/last      | GET         | Get last location update for specific device                                                       |
-| /trip-status                     | GET, POST   | Get all or save new [trip status update](https://docs.hypertrack.com/#trip-payload)                |
+| /trip-status                     | GET, POST   | Get all or save new [trip status update](https://www.hypertrack.com/docs/references/#references-webhooks-trip-payload)                |
 | /trip-status/{device_id}         | GET         | Get all trip status updates for specific trip                                                      |
 | /trip-status/{device_id}/last    | GET         | Get last trip status update for specific trip                                                      |
 |                                  |
-| /hypertrack                      | POST        | Endpoint to receive [HyperTrack Webhooks](https://docs.hypertrack.com/#webhooks). Read more below. |
+| /hypertrack                      | POST        | Endpoint to receive [HyperTrack Webhooks](https://www.hypertrack.com/docs/references/#references-webhooks). Read more below. |
 
 ### Webhooks
 
@@ -167,7 +167,7 @@ With the deployment of this project, you will have an endpoint listening to inco
 - Heroku: `https://<heroku_app_name>.herokuapp.com/hypertrack`
 - Localtunnel: `https://<alias>.localtunnel.me/hypertrack` (alias can be configured in the package.json)
 
-All webhooks will be processed and stored to the MongoDB. Some updates might update other database records (e.g. battery status update reflected in device records). It is important to note that `destination_arrival` [trip webhooks](https://docs.hypertrack.com/#trip-payload) will trigger [trip completion API calls](https://docs.hypertrack.com/#complete-trip) two minutes after the webhook arrival. You can change this behavior by modifying the `routes/webhook.route.js` file.
+All webhooks will be processed and stored to the MongoDB. Some updates might update other database records (e.g. battery status update reflected in device records). It is important to note that `destination_arrival` [trip webhooks](https://www.hypertrack.com/docs/references/#references-webhooks-trip-payload) will trigger [trip completion API calls](https://www.hypertrack.com/docs/references/#references-apis-trips-complete-trip) two minutes after the webhook arrival. You can change this behavior by modifying the `routes/webhook.route.js` file.
 
 > _Note_: You can look into the console logs to review all received webhooks. This also allows you to run through the one-time verification for HyperTrack Webhooks.
 
